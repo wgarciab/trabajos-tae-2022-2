@@ -73,7 +73,63 @@ college_subset[6:13] <- college_subset[6:13] %>%
 ```{r}
 sapply(college_subset, function(x) sum(is.na(x)))
 ```
+
+# PCA
+```{r}
+college_subset2 <- college_subset[,6:13]
+college_subset2 <- scale(college_subset2,center = TRUE,scale = TRUE)
+college_pca <- prcomp(college_subset2)
+summary(college_pca)
+```
+Con las primeras 7 variables se explica un 94% de la varianza total.
+
 # Clustering
+
+## Seleccion del numero de clusters
+
+```{r}
+library(broom)
+library(tidyr)
+library(dplyr)
+set.seed(1234)
+kclusts <- data.frame(k=4:20) %>% 
+    group_by(k) %>% 
+    do(kclust = kmeans(college_subset2, .$k))
+
+clusters <- kclusts %>% group_by(k) %>% do(tidy(.$kclust[[1]]))
+assignments <- kclusts %>% group_by(k) %>% do(augment(.$kclust[[1]], college_subset2))
+clusterings <- kclusts %>% group_by(k) %>% do(glance(.$kclust[[1]]))
+
+library(ggfortify)
+ggplot(clusterings, aes(k, tot.withinss)) +
+    geom_line(color = "blue", alpha = 0.5, size = 2) +
+    geom_point(size = 0.8)
+```
+De acuerdo al metodo de elbow, el numero ideal de clusters es 7.
+
+## k-means
+
+```{r}
+set.seed(1234)
+autoplot(kmeans(college_subset2, 7), data = college_subset2, size = 3, alpha = 0.5) +
+    ggtitle("K-Means Clustering of College Scorecard Data") +
+    theme(legend.position="none")
+my_kmeans <- kmeans(college_subset2, 7)
+```
+
+## Examinando los clusters...
+
+En el cluster 2 hay muchas universidades de belleza y cosmetología
+
+```{r}
+colleges <- colleges %>% 
+    mutate(cluster = my_kmeans$cluster) 
+
+colleges %>%
+    filter(cluster == 2) %>%
+    select(INSTNM)
+```
+
 
 # Referencias
 
