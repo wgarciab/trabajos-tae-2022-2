@@ -1,0 +1,82 @@
+---
+title: "Análisis de resultados escolares con reducción de la dimensionalidad y agrupamiento"
+author:
+  - Wilmar Andres Garcia Bedoya
+  - Amilder
+  - Daniel
+date: '2022-09-06'
+output: html_document
+---
+
+# Carga y limpieza de datos
+Cargamos todos los datos
+
+```{r}
+#colleges = read.table("exercises-cluster-analysis-exercise-2/CollegeScorecard.csv",sep=",", header = TRUE, fill = TRUE, quote = "\"", na.strings = c("NULL", "PrivacySuppressed"))
+#colleges = read.table("exercises-cluster-analysis-exercise-2/CollegeScorecardDataDictionary-09-12-2015.csv",sep=",", header = TRUE, fill = TRUE, quote = "\"")
+#dim(college_data)
+#str(college_data)
+#datos_centrados<-scale(school_data,center = TRUE,scale = TRUE)
+#modelo_pca<-prcomp(datos_centrados)
+#summary(modelo_pca)
+
+library(readr)
+colleges <- read_csv("exercises-cluster-analysis-exercise-2/CollegeScorecard.csv", na = c("NULL", "PrivacySuppressed"))
+dictionary <- read_csv("exercises-cluster-analysis-exercise-2/CollegeScorecardDataDictionary-09-12-2015.csv")
+dim(colleges)
+
+```
+
+Quitamos las columnas nulas
+
+```{r}
+colleges <- Filter(function(x)!all(is.na(x)), colleges)
+dim(colleges)
+```
+
+Seleccionamos variables relevantes
+
+```{r}
+library(dplyr)
+college_subset <- colleges %>% 
+    select(OPEID, INSTNM, CITY, STABBR, ZIP, 
+           CONTROL, DISTANCEONLY, CITY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV)
+```
+
+Las variables seleccionados fueron las siguientes
+
+```{r}
+dictionary %>% filter(`VARIABLE NAME` %in% names(college_subset)) %>% select(`NAME OF DATA ELEMENT`)
+```
+
+Nulos en cada columna
+
+```{r}
+sapply(college_subset, function(x) sum(is.na(x)))
+```
+Reemplazamos nulos por la mediana
+
+```{r}
+library(plyr)
+library(dplyr)
+median_values <- colleges[,6:13] %>% 
+    summarise_each(funs(median(., na.rm = TRUE)))
+
+median_values
+
+college_subset[6:13] <- college_subset[6:13] %>%
+    mutate_each(funs(if_else(is.na(.), median(., na.rm = TRUE), .)))
+
+```
+
+```{r}
+sapply(college_subset, function(x) sum(is.na(x)))
+```
+# Clustering
+
+# Referencias
+
+https://rpubs.com/juliasilge/207156
+https://rpubs.com/juliasilge/216478
+
