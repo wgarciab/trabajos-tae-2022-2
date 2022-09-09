@@ -30,6 +30,7 @@ dim(colleges)
 Quitamos las columnas nulas
 
 ```{r}
+sum(is.na(colleges$gt_25k_p9))
 colleges <- Filter(function(x)!all(is.na(x)), colleges)
 dim(colleges)
 ```
@@ -105,6 +106,7 @@ ggplot(clusterings, aes(k, tot.withinss)) +
     geom_line(color = "blue", alpha = 0.5, size = 2) +
     geom_point(size = 0.8)
 ```
+
 De acuerdo al metodo de elbow, el numero ideal de clusters es 7.
 
 ## k-means
