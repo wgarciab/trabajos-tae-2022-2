@@ -26,7 +26,8 @@ Podemos examinar las primeras 6 observaciones para hacernos una idea de la estru
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
-kable(head(colleges))
+#kable(head(colleges))
+DT::datatable(head(colleges))
 ```
 
 Lo que haremos a continuación será quitar las columnas nulas, es decir, aquellas variables para las cuales no hay información. De esta forma, nuestra base de datos se redujo de 1725 a 551 columnas.
