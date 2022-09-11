@@ -1,38 +1,36 @@
 ---
 title: "Análisis de resultados escolares con reducción de la dimensionalidad y agrupamiento"
 author:
+  - Amilder Stewin Ospina Tobon
+  - Daniel Torres Aguirre
   - Wilmar Andres Garcia Bedoya
-  - Amilder
-  - Daniel
 date: '2022-09-06'
 output: html_document
 ---
 
+# Introducción
+En este informe, examinaremos una base de datos de universidades de estados unidos, proporcionada por el Departamento de Educación de los Estados Unidos. Nuestro objetivo será realizar un agrupamiento de estas universidades, para luego caracterizar cada grupo, y determinar qué hace que un grupo sea mejor que otro.
+
 # Carga y limpieza de datos
-Cargamos todos los datos
+Inicialmente, cargamos todos los datos. La base de datos contiene 7804 observaciones de 1725 variables.
 
-```{r}
-#colleges = read.table("exercises-cluster-analysis-exercise-2/CollegeScorecard.csv",sep=",", header = TRUE, fill = TRUE, quote = "\"", na.strings = c("NULL", "PrivacySuppressed"))
-#colleges = read.table("exercises-cluster-analysis-exercise-2/CollegeScorecardDataDictionary-09-12-2015.csv",sep=",", header = TRUE, fill = TRUE, quote = "\"")
-#dim(college_data)
-#str(college_data)
-#datos_centrados<-scale(school_data,center = TRUE,scale = TRUE)
-#modelo_pca<-prcomp(datos_centrados)
-#summary(modelo_pca)
-
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(readr)
 colleges <- read_csv("exercises-cluster-analysis-exercise-2/CollegeScorecard.csv", na = c("NULL", "PrivacySuppressed"))
 dictionary <- read_csv("exercises-cluster-analysis-exercise-2/CollegeScorecardDataDictionary-09-12-2015.csv")
 dim(colleges)
-
+#str(colleges)
+#summary(colleges)
+head(colleges)
 ```
 
 Quitamos las columnas nulas
 
 ```{r}
-sum(is.na(colleges$gt_25k_p9))
+sum(is.na(colleges$mn_earn_wne_p8))
 colleges <- Filter(function(x)!all(is.na(x)), colleges)
 dim(colleges)
+sapply(colleges, function(x) sum(is.na(x)))
 ```
 
 Seleccionamos variables relevantes
@@ -42,7 +40,7 @@ library(dplyr)
 college_subset <- colleges %>% 
     select(OPEID, INSTNM, CITY, STABBR, ZIP, 
            CONTROL, DISTANCEONLY, CITY, TUITFTE, ADM_RATE_ALL,
-           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV)
+           C150_4, DEBT_MDN,SAT_AVG, PCTFLOAN, UGDS, NPT4_PUB, NPT4_PRIV)
 ```
 
 Las variables seleccionados fueron las siguientes
@@ -61,12 +59,12 @@ Reemplazamos nulos por la mediana
 ```{r}
 library(plyr)
 library(dplyr)
-median_values <- colleges[,6:13] %>% 
+median_values <- colleges[,6:16] %>% 
     summarise_each(funs(median(., na.rm = TRUE)))
 
 median_values
 
-college_subset[6:13] <- college_subset[6:13] %>%
+college_subset[6:16] <- college_subset[6:16] %>%
     mutate_each(funs(if_else(is.na(.), median(., na.rm = TRUE), .)))
 
 ```
@@ -77,7 +75,7 @@ sapply(college_subset, function(x) sum(is.na(x)))
 
 # PCA
 ```{r}
-college_subset2 <- college_subset[,6:13]
+college_subset2 <- college_subset[6:16]
 college_subset2 <- scale(college_subset2,center = TRUE,scale = TRUE)
 college_pca <- prcomp(college_subset2)
 summary(college_pca)
@@ -127,9 +125,23 @@ En el cluster 2 hay muchas universidades de belleza y cosmetología
 colleges <- colleges %>% 
     mutate(cluster = my_kmeans$cluster) 
 
+college_subset <- college_subset %>% 
+    mutate(cluster = my_kmeans$cluster) 
+
 colleges %>%
-    filter(cluster == 2) %>%
+    filter(cluster == 1) %>%
     select(INSTNM)
+
+cluster1 <- college_subset %>%
+    filter(cluster == 1) %>%
+    select(OPEID, INSTNM, CITY, STABBR, ZIP, 
+           CONTROL, DISTANCEONLY, CITY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+summary(cluster1)
+hist(cluster1$TUITFTE)
+write.csv(cluster1,"cluster1.csv", row.names = FALSE)
 ```
 
 

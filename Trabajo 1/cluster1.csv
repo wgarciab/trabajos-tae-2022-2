@@ -1,0 +1,38 @@
+"OPEID","INSTNM","CITY","STABBR","ZIP","CONTROL","DISTANCEONLY","TUITFTE","ADM_RATE_ALL","C150_4","DEBT_MDN","NPT4_PUB","NPT4_PRIV","SAT_AVG","PCTFLOAN","UGDS"
+2504200,"Walden University","Minneapolis","MN","55401",3,1,7765,0.7167,0.46545,11500.5,8792,18259,1036.5,0.7288,8064
+3234300,"Charter Oak State College","New Britain","CT","6053",1,1,7207,0.7167,0.46545,12258,8792,18259,1036.5,0.337,1471
+3007000,"Frontier Nursing University","Hyden","KY","41749",2,1,18840,0.7167,0.46545,9833,8792,18259,1036.5,0.5926,432.5
+3965300,"New England College of Business and Finance","Boston","MA","2110",3,1,9813,0.7167,1,12450,8792,11406,1036.5,0.3215,918
+283400,"Excelsior College","Albany","NY","12203-5159",2,1,3944,0.7167,0.46545,7000,8792,18259,1036.5,0.0689,37440
+2572800,"Vista College-Online","Clearfield","UT","84015",3,1,9506,0.7167,0.46545,9500,8792,16131,1036.5,0.2253,207
+3267300,"Capella University","Minneapolis","MN","55402-3389",3,1,18699,0.7167,0,9310.5,8792,18259,1036.5,0.8493,7935
+3339400,"Western Governors University","Salt Lake City","UT","84107",2,1,7638,0.7167,0.2418,12500,8792,12349,1036.5,0.6445,35493
+4122300,"Grantham University","Kansas City","MO","64153",3,1,5654,0.7167,0.46545,5781,8792,10744,1036.5,0.1936,9521
+4194400,"American College of Healthcare Sciences","Portland","OR","97239",3,1,10797,0.9559,0.46545,9833,8792,21188,1036.5,0,293
+3813300,"Northcentral University","Prescott Valley","AZ","86314",3,1,12785,0.7167,0.46545,8599.5,8792,18259,1036.5,0.3283,250
+1014805,"Colorado Technical University-Online","Colorado Springs","CO","80907",3,1,13879,0.7167,0.2015,15834,8792,17256,1036.5,0.8923,17902
+3534300,"Jones International University","Centennial","CO","80112",3,1,16667,0.7167,0.2,8868,8792,15804,1036.5,0.8152,1586
+2113600,"American InterContinental University-Online","Schaumburg","IL","60173",3,1,15452,0.7167,0.3122,15409,8792,17314,1036.5,0.896,10103
+3819300,"American Public University System","Charles Town","WV","25414",3,1,7090,0.7167,0.4211,3544,8792,9095,1036.5,0.2727,42460
+4127900,"Trident University International","Cypress","CA","90630-5041",3,1,7156,0.7167,0.5827,9385,8792,15107,1036.5,0.1223,3790
+747000,"The Art Institute of Pittsburgh-Online Division","Pittsburgh","PA","15222-4332",3,1,10755,0.7167,0.1145,9501,8792,26314,1036.5,0.757,10896
+193700,"Ottawa University-Online","Ottawa","KS","66067",2,1,35041,0.9888,0.46545,17000,8792,18259,1036.5,0.6218,379
+4100400,"Taft University System","Santa Ana","CA","92704",3,1,6021,0.7167,0.46545,9833,8792,18259,1036.5,0,4
+4080300,"Aspen University","Denver","CO","80246",3,1,4852,0.7167,0.46545,9500,8792,21326,1036.5,0.0831,162
+3031400,"International Academy of Design and Technology-Online","Tampa","FL","33634",3,1,19393,0.7167,0.1165,15042,8792,17272,1036.5,0.9293,1251
+2179907,"Argosy University-Phoenix Online Division","Phoenix","AZ","85021",3,1,11428,0.7167,0.2388,9500,8792,31831,1036.5,0.6546,8917
+4118700,"American Business and Technology University","St Joseph","MO","64506",3,1,1627,0.7167,1,7716,8792,19214,1036.5,0.1486,1819
+4119100,"City Vision College","Kansas City","MO","64109-1845",2,1,2934,0.7167,0.46545,9833,8792,18259,1036.5,0.2381,74
+931309,"Daymar College-Online","Louisville","KY","40245",3,1,14919,0.7167,0.46545,13736.5,8792,21430,1036.5,0.7431,368
+340400,"Johnson & Wales University-Online","Providence","RI","2903",2,1,2946,0.7079,0.46545,20667,8792,18259,1036.5,0.823,118
+4189300,"Allied American University","Laguna Hills","CA","92653-1337",3,1,5076,0.7167,0.46545,4750,8792,16439,1036.5,0.0743,2527
+3026510,"Remington College-Heathrow Campus","Heathrow","FL","33612-5627",2,1,10021,0.7805,0.46545,9500,8792,19150,1036.5,0.83,235
+4157400,"National Paralegal College","Phoenix","AZ","85014-1561",3,1,6917,0.7167,0.4815,9205,8792,14652,1036.5,0.5636,1089
+111700,"Azusa Pacific Online University","Glendora","CA","91740",2,1,7136,0.7985,0.46545,19000,8792,16569,1036.5,0.7248,650
+1303900,"South University–Savannah Online","Savannah","GA","31406",3,1,7171,0.4829,0.0176,9500,8792,25914,1036.5,0.5433,9592
+4217600,"Sessions College for Professional Design","Tempe","AZ","85281",3,1,95815,0.9565,0.46545,9833,8792,18259,1036.5,0,70
+4208700,"Colorado State University-Global Campus","Greenwood Village","CO","80111-0000",1,1,9523,0.7167,0.46545,7958,8792,18259,1036.5,0.5225,5282
+332900,"Pennsylvania State University-World Campus","University Park","PA","16802-1503",1,1,6355,0.6488,0.46545,21500,18165,18259,968,0.5769,4881
+267802,"Bryant & Stratton College-Online","Orchard Park","NY","14127",3,1,12045,0.7167,0.186,10250,8792,11616,1036.5,0.8834,2132
+146900,"Florida Institute of Technology-Online","Melbourne","FL","32901",2,1,5569,0.6045,0.46545,8509,8792,18259,1036.5,0.592,2304
+4218300,"Midwives College of Utah","Salt Lake City","UT","84106",2,1,4818,0.7167,0.46545,9833,8792,18259,1036.5,0.0227,151
