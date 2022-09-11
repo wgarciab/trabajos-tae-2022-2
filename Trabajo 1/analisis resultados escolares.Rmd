@@ -98,7 +98,9 @@ summary(college_pca)
 
 ## Seleccion del numero de clusters
 
-```{r}
+Para seleccionar el número adecuado de clusters, usaremos el método de Elbow. Veamos la curva generada:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(broom)
 library(tidyr)
 library(dplyr)
@@ -117,23 +119,26 @@ ggplot(clusterings, aes(k, tot.withinss)) +
     geom_point(size = 0.8)
 ```
 
-De acuerdo al metodo de elbow, el numero ideal de clusters es 7.
+De acuerdo al metodo de Elbow, el número ideal de clusters es 12.
 
-## k-means
+## Agrupamiento con K-means
 
-```{r}
+Para realizar el agrupamiento, utilizaremos k-means con 12 clústers. El resultado del agrupamiento de puede apreciar en la siguiente figura
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 set.seed(1234)
-autoplot(kmeans(college_subset2, 7), data = college_subset2, size = 3, alpha = 0.5) +
+autoplot(kmeans(college_subset2, 12), data = college_subset2, size = 3, alpha = 0.5) +
     ggtitle("K-Means Clustering of College Scorecard Data") +
     theme(legend.position="none")
-my_kmeans <- kmeans(college_subset2, 7)
+
+my_kmeans <- kmeans(college_subset2, 12)
 ```
 
-## Examinando los clusters...
+## Caracterización de los clusters
 
-En el cluster 2 hay muchas universidades de belleza y cosmetología
+En el cluster ? hay muchas universidades de belleza y cosmetología
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 colleges <- colleges %>% 
     mutate(cluster = my_kmeans$cluster) 
 
