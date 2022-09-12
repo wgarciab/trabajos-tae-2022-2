@@ -287,8 +287,22 @@ radarchart(df_norm,
 
 legend(x=1.15, 
        y=1.35, 
-       legend = rownames(df_norm[-c(1,2),]-2), 
+       legend = rownames(df_norm[-c(1,2),]-2),
        bty = "n", pch=20 , col = 1:12, cex = 1.05, pt.cex = 1.5)
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#para visualizar cada cluster por separado, cambiar el siguiente numero:
+cluster_number = 3
+df_cluster_mean = df_norm[cluster_number,]
+df_cluster_mean <- rbind(rep(max(df_cluster_mean), 9), rep(0, 9), df_cluster_mean)
+
+radarchart(df_cluster_mean, 
+           seg = 9,  # Number of axis segments
+           title = "Clusters de universidades",
+           pcol = 1,
+           plwd = 2)
 
 ```
 
