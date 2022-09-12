@@ -296,13 +296,13 @@ legend(x=1.15,
 
 ## Descripcion de los grupos
 
-El cluster 1 tiene los puntajes de admision mas altos, al igual que la tasa de completación de estudios, pero su tasa de admisión es la mas baja, y cuenta con pocos estudiantes y pocas ayudas del estado. Además, el costo de estudiar en universidades privadas de este grupo es excesivamente alto, y la deuda acumulada es bastante alta también. Se podría decir que es un grupo de universidades exclusivo.
+En el cluster 1, hay una masiva tasa de admisión, cercana al 90%, pero en todos los demás aspectos presenta valores muy bajos. Sus tasas de completación de estudios y número de estudiantes es muy bajo. Como punto positivo, los costos por estudiar en estas instituciones tambien son muy bajos, aunque curiosamente, es un poco más costoso estudiar en instituciones públicas que en instituciones privadas. Cerca del 50% de los estudiantes recibe préstamos del estado, pero la deuda acumulada es muy baja, lo cual es debido posiblemente a los bajos costos de estas universidades. Sus puntajes de admision tambien son muy bajos. Se podría decir que a estas instituciones se puede entrar muy fácilmente.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
 cluster_number = 3
 df_cluster_mean = df_norm[cluster_number,]
-df_cluster_mean <- rbind(rep(max(df_cluster_mean), 9), rep(0, 9), df_cluster_mean)
+df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
@@ -312,13 +312,13 @@ radarchart(df_cluster_mean,
 
 ```
 
-En el cluster 2, se puede observar que hay una masiva cantidad de préstamos del estado para los estudiantes, sin embargo, las tasas de admisión y completación son bajas, al igual que el número de estudiantes. La gran cantidad de préstamos puede ser uno de los factores causantes de que haya una deuda acumulada relativamente grande entre todos los estudiantes. Las tasas de matrícula estan en un rango medio, siendo un poco mas caras las de instituciones privadas.
+El cluster 2 tiene los puntajes de admision mas altos, al igual que la tasa de completación de estudios mas alta, pero su tasa de admisión es la mas baja, y cuenta con pocos estudiantes. Cerca del 80% de los estudiantes recibe préstamos del estado, y además, el costo de estudiar en universidades privadas de este grupo es excesivamente alto, razón por la cual se puede explicar que la deuda acumulada sea bastante alta también. Se podría decir que es un grupo de universidades exclusivo.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
 cluster_number = 4
 df_cluster_mean = df_norm[cluster_number,]
-df_cluster_mean <- rbind(rep(max(df_cluster_mean), 9), rep(0, 9), df_cluster_mean)
+df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
@@ -328,13 +328,13 @@ radarchart(df_cluster_mean,
 
 ```
 
-En el cluster 3, hay una masiva tasa de admisión, pero en todos los demás aspectos presenta valores muy bajos. Sus tasas de completación y número de estudiantes es muy bajo. Como punto positivo, los costos por estudiar en estas instituciones tambien son muy bajo, y tal vez por ello no se realizan muchos prestamos. Sus puntajes de admision tambien son muy bajos. Se podría decir que a estas instituciones se puede entrar muy facilmente.
+El cluster 3 es más interesante que los anteriores. Su número de estudiantes es muy bajo, pero en todos los demás aspectos es bastante equilibrado. El costo de estudiar en instituciones privadas de este grupo es intermedio, y en instituciones públicas es un poco inferior. Cerca del 50% de los estudiantes de este grupo tienen préstamos, pero aun así, la deuda acumulada no es muy grande. Los puntajes de admisión son relativamente altos, y la tasa de admisión está derca del 20%. La tasa de completación está cerca del 40%
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
 cluster_number = 5
 df_cluster_mean = df_norm[cluster_number,]
-df_cluster_mean <- rbind(rep(max(df_cluster_mean), 9), rep(0, 9), df_cluster_mean)
+df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
@@ -344,13 +344,13 @@ radarchart(df_cluster_mean,
 
 ```
 
-En el cluster 4, al igual que en el caso anterior, tambien hay altas tasas de admisión y bajo número de estudiantes, pero en este caso, se presenta una mayor cantidad de deudas de los estudiantes. Los ingresos de las universidades recibidos por cada estudiante son bajos, y es un poco más caro estudiar en universidades privadas que en universidades publicas de este grupo. Los puntajes de admisión también son muy bajos.
+El cluster 4...
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
 cluster_number = 6
 df_cluster_mean = df_norm[cluster_number,]
-df_cluster_mean <- rbind(rep(max(df_cluster_mean), 9), rep(0, 9), df_cluster_mean)
+df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
@@ -369,7 +369,7 @@ Ademas el promedio de la deuda de los estudiantes y el promedio de estudiantes q
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
 cluster_number = 7
 df_cluster_mean = df_norm[cluster_number,]
-df_cluster_mean <- rbind(rep(max(df_cluster_mean), 9), rep(0, 9), df_cluster_mean)
+df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
@@ -388,7 +388,7 @@ en cuanto a las deudas promedios de los estudiante(DEBT_MDN) tambien son bajas y
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
 cluster_number = 8
 df_cluster_mean = df_norm[cluster_number,]
-df_cluster_mean <- rbind(rep(max(df_cluster_mean), 9), rep(0, 9), df_cluster_mean)
+df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
@@ -407,7 +407,7 @@ Con una deuda promedio en la universidad por todos los estudiantes (DEBT_MDN) co
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
 cluster_number = 9
 df_cluster_mean = df_norm[cluster_number,]
-df_cluster_mean <- rbind(rep(max(df_cluster_mean), 9), rep(0, 9), df_cluster_mean)
+df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
@@ -426,7 +426,7 @@ mientras que la deuda promedio de prestamo por todos los estudiantes (DEBT_MDN) 
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
 cluster_number = 10
 df_cluster_mean = df_norm[cluster_number,]
-df_cluster_mean <- rbind(rep(max(df_cluster_mean), 9), rep(0, 9), df_cluster_mean)
+df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
@@ -435,6 +435,23 @@ radarchart(df_cluster_mean,
            plwd = 2)
 
 ```
+
+El cluster 9...
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#para visualizar cada cluster por separado, cambiar el siguiente numero:
+cluster_number = 11
+df_cluster_mean = df_norm[cluster_number,]
+df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
+
+radarchart(df_cluster_mean, 
+           seg = 9,  # Number of axis segments
+           title = "Clusters de universidades",
+           pcol = 1,
+           plwd = 2)
+
+```
+
 # Referencias
 
 https://rpubs.com/juliasilge/207156
