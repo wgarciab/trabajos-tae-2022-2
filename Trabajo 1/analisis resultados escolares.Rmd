@@ -140,26 +140,156 @@ my_kmeans <- kmeans(college_subset2, 12)
 En el cluster ? hay muchas universidades de belleza y cosmetología
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-colleges <- colleges %>% 
+#colleges <- colleges %>% 
+#    mutate(cluster = my_kmeans$cluster) 
+
+college_subset2 = data.frame(college_subset2)
+college_subset2 <- college_subset2 %>% 
     mutate(cluster = my_kmeans$cluster) 
 
-college_subset <- college_subset %>% 
-    mutate(cluster = my_kmeans$cluster) 
+#colleges %>%
+#    filter(cluster == 1) %>%
+#    select(INSTNM)
 
-colleges %>%
+cluster1 <- college_subset2 %>%
     filter(cluster == 1) %>%
-    select(INSTNM)
-
-cluster1 <- college_subset %>%
-    filter(cluster == 1) %>%
-    select(OPEID, INSTNM, CITY, STABBR, ZIP, 
-           CONTROL, DISTANCEONLY, CITY, TUITFTE, ADM_RATE_ALL,
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
            C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
            PCTFLOAN, UGDS)
+
+cluster2 <- college_subset2 %>%
+    filter(cluster == 2) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster3 <- college_subset2 %>%
+    filter(cluster == 3) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster4 <- college_subset2 %>%
+    filter(cluster == 4) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster5 <- college_subset2 %>%
+    filter(cluster == 5) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster6 <- college_subset2 %>%
+    filter(cluster == 6) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster7 <- college_subset2 %>%
+    filter(cluster == 7) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster8 <- college_subset2 %>%
+    filter(cluster == 8) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster9 <- college_subset2 %>%
+    filter(cluster == 9) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster10 <- college_subset2 %>%
+    filter(cluster == 10) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster11 <- college_subset2 %>%
+    filter(cluster == 11) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
+cluster12 <- college_subset2 %>%
+    filter(cluster == 12) %>%
+    select(
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+           PCTFLOAN, UGDS)
+
 
 summary(cluster1)
 hist(cluster1$TUITFTE)
 write.csv(cluster1,"cluster1.csv", row.names = FALSE)
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(fmsb)
+
+#normalize <- function(x) {
+#  return((x - min(x)) / (max(x) - min(x)))
+#}
+
+cluster1_means = t(colMeans(cluster1[3:11]))
+cluster2_means = t(colMeans(cluster2[3:11]))
+cluster3_means = t(colMeans(cluster3[3:11]))
+cluster4_means = t(colMeans(cluster4[3:11]))
+cluster5_means = t(colMeans(cluster5[3:11]))
+cluster6_means = t(colMeans(cluster6[3:11]))
+cluster7_means = t(colMeans(cluster7[3:11]))
+cluster8_means = t(colMeans(cluster8[3:11]))
+cluster9_means = t(colMeans(cluster9[3:11]))
+cluster10_means = t(colMeans(cluster10[3:11]))
+cluster11_means = t(colMeans(cluster11[3:11]))
+cluster12_means = t(colMeans(cluster12[3:11]))
+
+
+df = data.frame()
+df = rbind(df, cluster1_means)
+df = rbind(df, cluster2_means)
+df = rbind(df, cluster3_means)
+df = rbind(df, cluster4_means)
+df = rbind(df, cluster5_means)
+df = rbind(df, cluster6_means)
+df = rbind(df, cluster7_means)
+df = rbind(df, cluster8_means)
+df = rbind(df, cluster9_means)
+df = rbind(df, cluster10_means)
+df = rbind(df, cluster11_means)
+df = rbind(df, cluster12_means)
+
+df_norm <- as.data.frame(apply(df[, 1:9], 2, function(x) (x - min(x))/(max(x)-min(x))))
+
+df_norm <- rbind(rep(max(df_norm), 9), rep(0, 9), df_norm)
+
+radarchart(df_norm, 
+           seg = 9,  # Number of axis segments
+           title = "Clusters de universidades",
+           pcol = 1:12,
+           plwd = 2)
+
+legend(x=1.15, 
+       y=1.35, 
+       legend = rownames(df_norm[-c(1,2),]-2), 
+       bty = "n", pch=20 , col = 1:12, cex = 1.05, pt.cex = 1.5)
+
 ```
 
 
