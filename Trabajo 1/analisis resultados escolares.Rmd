@@ -92,8 +92,8 @@ sapply(college_subset2, function(x) sum(is.na(x)))
 Con las primeras 9 variables se explica un 92.9% de la varianza total.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-college_subset2 <- scale(college_subset2,center = TRUE,scale = TRUE)
-college_pca <- prcomp(college_subset2)
+college_subset2_cent <- scale(college_subset2,center = TRUE,scale = TRUE)
+college_pca <- prcomp(college_subset2_cent)
 summary(college_pca)
 ```
 
@@ -130,11 +130,11 @@ Para realizar el agrupamiento, utilizaremos k-means con 12 clústers. El resulta
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 set.seed(1234)
-autoplot(kmeans(college_subset2, 12), data = college_subset2, size = 3, alpha = 0.5) +
+autoplot(kmeans(college_subset2, 9), data = college_subset2, size = 3, alpha = 0.5) +
     ggtitle("K-Means Clustering of College Scorecard Data") +
     theme(legend.position="none")
 
-my_kmeans <- kmeans(college_subset2, 12)
+my_kmeans <- kmeans(college_subset2, 9)
 ```
 
 ## Caracterización de los clusters
@@ -216,26 +216,27 @@ cluster9 <- college_subset2 %>%
            C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
            PCTFLOAN, UGDS)
 
-cluster10 <- college_subset2 %>%
-    filter(cluster == 10) %>%
-    select(
-           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
-           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
-           PCTFLOAN, UGDS)
 
-cluster11 <- college_subset2 %>%
-    filter(cluster == 11) %>%
-    select(
-           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
-           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
-           PCTFLOAN, UGDS)
+# cluster10 <- college_subset2 %>%
+#     filter(cluster == 10) %>%
+#     select(
+#            CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+#            C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+#            PCTFLOAN, UGDS)
 
-cluster12 <- college_subset2 %>%
-    filter(cluster == 12) %>%
-    select(
-           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
-           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
-           PCTFLOAN, UGDS)
+# cluster11 <- college_subset2 %>%
+#     filter(cluster == 11) %>%
+#     select(
+#            CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+#            C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+#            PCTFLOAN, UGDS)
+
+# cluster12 <- college_subset2 %>%
+#     filter(cluster == 12) %>%
+#     select(
+#            CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+#            C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, DEBT_MDN,SAT_AVG,
+#            PCTFLOAN, UGDS)
 
 
 summary(cluster1)
@@ -258,9 +259,9 @@ cluster6_means = t(colMeans(cluster6[3:11]))
 cluster7_means = t(colMeans(cluster7[3:11]))
 cluster8_means = t(colMeans(cluster8[3:11]))
 cluster9_means = t(colMeans(cluster9[3:11]))
-cluster10_means = t(colMeans(cluster10[3:11]))
-cluster11_means = t(colMeans(cluster11[3:11]))
-cluster12_means = t(colMeans(cluster12[3:11]))
+#cluster10_means = t(colMeans(cluster10[3:11]))
+#cluster11_means = t(colMeans(cluster11[3:11]))
+#cluster12_means = t(colMeans(cluster12[3:11]))
 
 
 df = data.frame()
@@ -273,9 +274,9 @@ df = rbind(df, cluster6_means)
 df = rbind(df, cluster7_means)
 df = rbind(df, cluster8_means)
 df = rbind(df, cluster9_means)
-df = rbind(df, cluster10_means)
-df = rbind(df, cluster11_means)
-df = rbind(df, cluster12_means)
+#df = rbind(df, cluster10_means)
+#df = rbind(df, cluster11_means)
+#df = rbind(df, cluster12_means)
 
 df_norm <- as.data.frame(apply(df[, 1:9], 2, function(x) (x - min(x))/(max(x)-min(x))))
 
