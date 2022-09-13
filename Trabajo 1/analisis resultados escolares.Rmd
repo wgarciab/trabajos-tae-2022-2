@@ -32,7 +32,7 @@ DT::datatable(head(colleges), options = list(
         scrollY = "250px"))
 ```
 
-Lo que haremos a continuación será quitar las columnas nulas, es decir, aquellas variables para las cuales no hay información. De esta forma, nuestra base de datos se redujo de 1725 a 551 columnas.
+Lo que haremos a continuación será quitar las columnas nulas, es decir, aquellas variables para las cuales no hay información. De esta forma, nuestra base de datos se reduce de 1725 a 551 columnas.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #sum(is.na(colleges$mn_earn_wne_p8))
@@ -89,13 +89,15 @@ sapply(college_subset2, function(x) sum(is.na(x)))
 
 # PCA (Análisis de componentes principales)
 
-Con las primeras 9 variables se explica un 92.9% de la varianza total.
+Para realizar el agrupamiento, únicamente utilizaremos las últimas 11 variables, ya que las primeras 5, tales como el nombre de la institución o su código, no nos resultan útiles para el clustering. Con las primeras 9 variables de estas 11, se explica un 92.9% de la varianza total. 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 college_subset2_cent <- scale(college_subset2,center = TRUE,scale = TRUE)
 college_pca <- prcomp(college_subset2_cent)
 summary(college_pca)
 ```
+
+Sin embargo, las usaremos todas, porque es de nuestro interés analizarlas todas.
 
 # Clustering
 
@@ -122,11 +124,11 @@ ggplot(clusterings, aes(k, tot.withinss)) +
     geom_point(size = 0.8)
 ```
 
-De acuerdo al metodo de Elbow, el número ideal de clusters es 12.
+De acuerdo al metodo de Elbow, el número ideal de clusters es 9, ya que se puede apreciar un "codo" en la gráfica cerca a k = 9.
 
 ## Agrupamiento con K-means
 
-Para realizar el agrupamiento, utilizaremos k-means con 12 clústers. El resultado del agrupamiento de puede apreciar en la siguiente figura
+Para realizar el agrupamiento, utilizaremos k-means con 9 clústers. El resultado del agrupamiento de puede apreciar en la siguiente figura
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 set.seed(1234)
@@ -139,7 +141,7 @@ my_kmeans <- kmeans(college_subset2, 9)
 
 ## Caracterización de los clusters
 
-En el cluster ? hay muchas universidades de belleza y cosmetología
+A continuación, revisaremos cada uno de los clusters y examinaremos sus principales características. En el siguiente gráfico, llamado gráfico de radar, se presentan las medias de los 9 clusters en cada una de las variables, normalizadas entre 0 y 1. Los valores más alejados del centro representan valores más grandes.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #colleges <- colleges %>% 
@@ -295,7 +297,7 @@ legend(x=1.15,
        bty = "n", pch=20 , col = 1:12, cex = 1.05, pt.cex = 1.5)
 ```
 
-## Descripcion de los grupos
+### Descripcion de los grupos
 
 En el cluster 1, hay una masiva tasa de admisión, cercana al 90%, pero en todos los demás aspectos presenta valores muy bajos. Sus tasas de completación de estudios y número de estudiantes es muy bajo. Como punto positivo, los costos por estudiar en estas instituciones tambien son muy bajos, aunque curiosamente, es un poco más costoso estudiar en instituciones públicas que en instituciones privadas. Cerca del 50% de los estudiantes recibe préstamos del estado, pero la deuda acumulada es muy baja, lo cual es debido posiblemente a los bajos costos de estas universidades. Sus puntajes de admision tambien son muy bajos. Se podría decir que a estas instituciones se puede entrar muy fácilmente.
 
@@ -475,6 +477,6 @@ college_subset <- college_subset %>%
 
 # Referencias
 
-https://rpubs.com/juliasilge/207156
-https://rpubs.com/juliasilge/216478
+Silge, J. (2016). Exploratory Data Analysis of College Scorecard Data. https://rpubs.com/juliasilge/207156  
+Silge, J. (2016). Imputing Missing Values in the College Scorecard Data Via Very Simple Methods. https://rpubs.com/juliasilge/216478
 
