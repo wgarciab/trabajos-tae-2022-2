@@ -484,7 +484,36 @@ college_subset <- college_subset %>%
 # 
 # write.csv(cluster_full,"clustersdata/cluster9.csv", row.names = FALSE)
 ```
+### Propuesta de analisis en colombia 
 
+Para el desarrollo de un análisis en colombia, similar al realizado con el dataset College
+ScoreCard podemos extraer información de las siguientes páginas:
+En la página del ministerio de educación nacional(https://hecaa.mineducacion.gov.co/consultaspublicas/content/poblacional/index.jsf) 
+podemos encontrar información de los estudiantes inscritos, los estudiantes matriculados, los estudiantes graduados y los
+docentes, los cuales se encuentran segmentados por:
+  ● universidades oficiales
+  ● universidades privadas
+  ● mujeres
+  ● hombres
+  ● nivel de formación
+Todos esto por años en específico desde 2016 hasta el 2021
+Además para los docentes también podemos encontrar el área de conocimiento en la que
+se encuentran
+
+También se encuentra la información por IES la cual nos da el número de estudiantes
+matriculados, inscritos y admitidos en un año en específico, como también el número total
+de docentes con el que cuenta la universidad.
+
+En la página El observatorio de la universidad colombiana
+(https://www.universidad.edu.co/evolucion-de-los-resultados-saber-pro-en-todas-las-ies-del-pais-ano-2-020/)
+se puede encontrar información
+sobre el promedio de las pruebas saber pro por universidad
+Además de esta información se vería necesario recolectar el promedio de los puntajes de
+admisión por universidad, además de un promedio del coste de la matrícula de todos los
+estudiantes por universidad, la cantidad de estudiantes que cuentan con becas o ayudas del
+estado, en caso de las universidades públicas el presupuesto destinado por el estado y por
+último los ingresos de la universidad tanto por investigación y extensión como los obtenidos
+por la matrícula de los estudiantes
 
 # Referencias
 
