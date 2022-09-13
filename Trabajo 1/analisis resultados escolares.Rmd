@@ -413,10 +413,12 @@ radarchart(df_cluster_mean,
 
 ```
 
-El cluster #8 se ve caracterizado por un nivel de admisiones (ADM_RATE_ALL) bueno (cercano al 70%), ademas de esto tanto en el desempeño en la carrera (C150_4) como en el desempeño en pruebas academicas se ve un valor medio
-En cuanto a los aspectos economicos:
-Apesar de que los costos en universidades privadas(NPT4_PRIV) como en universidades publicas (NPT4_PUB) se podrian considerar altos, el numero de ingresos por estudiante en la universidad (TUITFTE) es bastante bajo 
-mientras que la deuda promedio de prestamo por todos los estudiantes (DEBT_MDN) y el numero de estudiantes que recibieron prestamos federales (PCTFLOAN) tienen un valor medio 
+
+
+El cluster #8 está caracterizado por una proporción considerable (85% aprox) de estudiantes admitidos (ADM_RATE_ALL) y una muy baja cantidad de estudiantes matriculados en universidades (UGDS) a comparación de otros clusters. En un ámbito académico el cluster no es de destacar, tiene un rendimiento académico (SAT_AVG) muy bajo y el avance esperado de sus estudiantes (C150_4) tampoco es bueno. Interesantemente, notamos que a pesar de que la deuda acumulada de la universidad (DEBT_MDN) y la proporción de estudiantes que han recibido préstamos (PCTFLOAN) es bajo, tanto el coste de matricula (TUITFTE) como el coste de estudiar en las instituciones (NPT4_PUB, NPT4_PRIV) son especialmente altos. 
+Teniendo en cuenta la disparidad entre estudiantes endeudados y costos de estudio en las universidades de este cluster, podríamos llegar a inferir que en estas universidades estudian personas con una capacidad adquisitiva suficiente para no tener que costear a crédito sus estudios. 
+
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
