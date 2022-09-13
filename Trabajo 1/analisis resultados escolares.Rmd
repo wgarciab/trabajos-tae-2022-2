@@ -54,7 +54,7 @@ college_subset <- colleges %>%
 Las variables seleccionados fueron las siguientes
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-dictionary %>% filter(`VARIABLE NAME` %in% names(college_subset)) %>% select(`NAME OF DATA ELEMENT`)
+dictionary %>% filter(`VARIABLE NAME` %in% names(college_subset)) %>% select('NAME OF DATA ELEMENT', 'VARIABLE NAME')
 ```
 
 Veamos cuantos nulos hay en cada columna
@@ -89,7 +89,18 @@ sapply(college_subset2, function(x) sum(is.na(x)))
 
 # PCA (Análisis de componentes principales)
 
-Para realizar el agrupamiento, únicamente utilizaremos las últimas 11 variables, ya que las primeras 5, tales como el nombre de la institución o su código, no nos resultan útiles para el clustering. Con las primeras 9 variables de estas 11, se explica un 92.9% de la varianza total. 
+Para realizar el agrupamiento, únicamente utilizaremos las últimas 11 variables, ya que las primeras 5, tales como el nombre de la institución o su código, no nos resultan útiles para el clustering.
+
+En la siguiente matrix de correlación podemos ver que no hay una correlación fuerte entre ninguna de las variables.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(corrplot)
+cor_matrix <- cor(college_subset2)
+round(cor_matrix, 2)
+corrplot(cor_matrix)
+```
+
+Con las primeras 9 variables de estas 11, se explica un 92.9% de la varianza total. 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 college_subset2_cent <- scale(college_subset2,center = TRUE,scale = TRUE)
@@ -451,7 +462,7 @@ radarchart(df_cluster_mean,
 
 ```
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 college_subset[6:16] <- college_subset[6:16] %>%
     mutate_each(funs(if_else(is.na(.), median(., na.rm = TRUE), .)))
 
@@ -461,7 +472,7 @@ college_subset <- college_subset %>%
 
 ```
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # generación de los archivoos csv de los clusters
 # cluster_full <- college_subset %>%
 #     filter(cluster == 9) %>%
@@ -472,7 +483,6 @@ college_subset <- college_subset %>%
 # 
 # write.csv(cluster_full,"clustersdata/cluster9.csv", row.names = FALSE)
 ```
-
 
 
 # Referencias
