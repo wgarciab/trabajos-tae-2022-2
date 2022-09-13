@@ -408,10 +408,9 @@ radarchart(df_cluster_mean,
 
 ```
 
-El cluster #7 se caracteriza por tener un nivel de admisiones (ADM_RATE_ALL) muy alto (cercano al 100%), en cuanto a otros aspectos academicos el desempeño en su carrera(C150_4) y el desempeño en pruebas escolares es bastante bajo.
-En aspecto economicos de las universidades:
-El costo en universidades publicas (NPT4_PUB) es bajo, pero en universidades privadas (NPT4_PRIV) el costo es alto, sin embargo en este grupo el promedio de ingresos por estudiante en la universidad(TUITFTE) lo podemos considerar bajo
-Con una deuda promedio en la universidad por todos los estudiantes (DEBT_MDN) con un valor medio, la mayoria de los estudiantes han recibido ayudas federales
+El cluster 7 se puede caracterizar por tener un nivel de admision bastante alto, cercano al 100%, pero podemos observar que el rendimiento en las pruebas de admision SAT es bastante bajo, lo que impleca que el puntaje necesario para entrar en estas universidades no es muy alto, tambien podemos notar como el desempeño en la completacion de la carrera en el tiempo estimado es bastante bajo
+en otros aspectos se puede observar que el coste promedio para estudiar tanto en universidades publicas como privadas lo podemos considerar bajo, como tambien los ingresos obtenidos por estudiantes matriculados es bastante bajo 
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
