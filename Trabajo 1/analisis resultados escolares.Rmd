@@ -239,10 +239,11 @@ cluster9 <- college_subset2 %>%
 #            PCTFLOAN, UGDS)
 
 
-summary(cluster1)
-hist(cluster1$TUITFTE)
-write.csv(cluster1,"cluster1.csv", row.names = FALSE)
+#summary(cluster1)
+#hist(cluster1$TUITFTE)
+#write.csv(cluster1,"cluster1.csv", row.names = FALSE)
 ```
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(fmsb)
 
@@ -290,7 +291,7 @@ radarchart(df_norm,
 
 legend(x=1.15, 
        y=1.35, 
-       legend = rownames(df_norm[-c(1,2),]-2),
+       legend = c(1:9),
        bty = "n", pch=20 , col = 1:12, cex = 1.05, pt.cex = 1.5)
 ```
 
@@ -300,13 +301,13 @@ En el cluster 1, hay una masiva tasa de admisión, cercana al 90%, pero en todos
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 3
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 1
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 1",
            pcol = 1,
            plwd = 2)
 
@@ -316,13 +317,13 @@ El cluster 2 tiene los puntajes de admision mas altos, al igual que la tasa de c
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 4
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 2
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 2",
            pcol = 1,
            plwd = 2)
 
@@ -332,13 +333,13 @@ El cluster 3 es más interesante que los anteriores. Su número de estudiantes e
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 5
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 3
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 3",
            pcol = 1,
            plwd = 2)
 
@@ -349,13 +350,13 @@ En base a la cantidad de estudiantes que logran entrar, al rendimiento académic
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 6
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 4
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 4",
            pcol = 1,
            plwd = 2)
 
@@ -365,13 +366,13 @@ El cluster 5 podemos observar un nivel de admision medianamente alto (cercano al
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 7
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 5
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 5",
            pcol = 1,
            plwd = 2)
 
@@ -382,13 +383,13 @@ en otros aspectos podemos ver que el coste de estudiar en una universidad public
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 8
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 6
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 6",
            pcol = 1,
            plwd = 2)
 
@@ -401,13 +402,13 @@ Con una deuda promedio en la universidad por todos los estudiantes (DEBT_MDN) co
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 9
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 7
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 7",
            pcol = 1,
            plwd = 2)
 
@@ -420,13 +421,13 @@ mientras que la deuda promedio de prestamo por todos los estudiantes (DEBT_MDN) 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 10
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 8
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 8",
            pcol = 1,
            plwd = 2)
 
@@ -436,13 +437,13 @@ El cluster #9 está caracterizado por un ratio de admision de estudiantes (ADM_R
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 11
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 9
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 9",
            pcol = 1,
            plwd = 2)
 
@@ -459,15 +460,17 @@ college_subset <- college_subset %>%
 ```
 
 ```{r}
-cluster_full <- college_subset %>%
-    filter(cluster == 9) %>%
-    select(OPEID, INSTNM, CITY, STABBR, ZIP,
-           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
-           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, SAT_AVG,
-           PCTFLOAN, UGDS)
-
-write.csv(cluster_full,"clustersdata/cluster9.csv", row.names = FALSE)
+# generación de los archivoos csv de los clusters
+# cluster_full <- college_subset %>%
+#     filter(cluster == 9) %>%
+#     select(OPEID, INSTNM, CITY, STABBR, ZIP,
+#            CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+#            C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, SAT_AVG,
+#            PCTFLOAN, UGDS)
+# 
+# write.csv(cluster_full,"clustersdata/cluster9.csv", row.names = FALSE)
 ```
+
 
 
 # Referencias
