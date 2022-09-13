@@ -344,7 +344,8 @@ radarchart(df_cluster_mean,
 
 ```
 
-El cluster 4...
+El cluster #4 está caracterizado por unos niveles de admisión (ADM_RATE_ALL) reducidos (40% aprox.) y una cantidad de estudiantes matriculados (UGDS) muy altas a comparación del resto de clusters. Los estudiantes en estas universidades parecen estar caracterizados por un nivel académico bueno en pruebas SAT (SAT_AVG) y niveles aceptables (45%) en cuanto al avance de sus carreras en el plazo estipulado se refiere (C150_4). Podemos notar tambén que a un nivel de préstamos, que la mayoría  de estudiantes no ha recibido subsidios o prestamos gubernametales (PCTFLOAN) y esto parece estar reflejado en el monto de deuda gubernamental acumulada (DEBT_MDN) registrada en dicha universidad que es bajo. Estas universidades en sí no parecen ser muy caras como se puede ver en la variable TUITFTE, pero sí parecen ser bastante costoso estudiar en ellas, aspecto evidenciado en los costos promedios totales en universidades públicas (NPT4_PUB)(con un 100% aprox.). En universidades privadas (NPT4_PRIV) no parece ser tan alto. 
+En base a la cantidad de estudiantes que logran entrar, al rendimiento académico de éstos y el coste promedio de estudiar en ellas, las instituciones formadas por éste cluster parecen ser universidades de media/alta calidad y para estudiantes con un estatus social medio/alto.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -436,7 +437,7 @@ radarchart(df_cluster_mean,
 
 ```
 
-El cluster 9...
+El cluster #9 está caracterizado por un ratio de admision de estudiantes (ADM_RATE_ALL) muy alto (casi el 100%) y un . El nivel de los estudiantes en las pruebas SAT es bastante bajo en estas universidades, y su avance esperado en sus carreras (C150_4) también lo es. En su gran mayoría, los alumnos de estas instituciones han recibido prestmamos (PCTFLOAN) federales (casi el 100%), a pesar del bajo coste aparente de matricular en estas (TUITFTE). Aun así podemos observar que el coste total de estudiar en estas universidades es medio para universidades privadas (NPT4_PRIV) y relativamente bajo para las públicas (NPT4_PUB). Finalmente hay que destacar que no hay una cantidad relativamente alta de estudiantes matriculados (UGDS) en este cluster a comparación de otros. Se podría decir, en base al historial crediticio, ratio de admisión, cantidad de estudiantes y desempeño académico, que en este cluster consta de pequeñas universidades publicas y privadas con estudiantes de medios/bajos recursos económicos. 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
