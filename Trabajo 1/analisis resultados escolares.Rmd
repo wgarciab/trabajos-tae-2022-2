@@ -448,6 +448,28 @@ radarchart(df_cluster_mean,
 
 ```
 
+```{r}
+college_subset[6:16] <- college_subset[6:16] %>%
+    mutate_each(funs(if_else(is.na(.), median(., na.rm = TRUE), .)))
+
+college_subset = data.frame(college_subset)
+college_subset <- college_subset %>% 
+    mutate(cluster = my_kmeans$cluster) 
+
+```
+
+```{r}
+cluster_full <- college_subset %>%
+    filter(cluster == 9) %>%
+    select(OPEID, INSTNM, CITY, STABBR, ZIP,
+           CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+           C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, SAT_AVG,
+           PCTFLOAN, UGDS)
+
+write.csv(cluster_full,"clustersdata/cluster9.csv", row.names = FALSE)
+```
+
+
 # Referencias
 
 https://rpubs.com/juliasilge/207156
