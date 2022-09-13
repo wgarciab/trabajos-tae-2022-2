@@ -361,10 +361,7 @@ radarchart(df_cluster_mean,
 
 ```
 
-El cluster #5 esta caracterizado por un nivel de admision(ADM_RATE_ALL) alto(cercano al 80%), en otras competencias academicas se puede observar que en promedio hay un desempeño bajo en las pruebas academicas(SAT_AVG) y en cuanto al desempeño esperado (C150_4) solo cerca del 50% logran cumplir con lo esperado.
-En otras competencias como en lo financiero podemos ver:
-los costos de estudio en universidades publicas (NPT4_PUB) son bajos, lo contrario que en las universidades privadas (NPT4_PRIV) los cuales son muy altos, aun así los ingresos netos de universidades por estudiante(TUITFTE) son medianamente bajos 
-Ademas el promedio de la deuda de los estudiantes y el promedio de estudiantes que recibieron prestamos federales son bastante altos.
+El cluster 5 podemos observar un nivel de admision medianamente alto (cercano al 70%), mientras que en el promedio de las pruebas de admision sat observamos un valor muy bajo, como tambien un desempeño en la completacion de la carrera en un tiempo especifico igualmente bajo, ahora viendo los aspectos economicos de las universidades, el coste de estudiar en una universidad privado como en una universidad publica es bastante parecido (rondando entre el 60% y el 50%), sin embargo los ingresos netos de matricula por los estudiantes es bastante bajo, ademas se tienen valores bastante altos tanto en la media de la deuda acumuladad por los estudiantes como en la cantidad de estudiantes que recibieron prestamos federales
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -380,10 +377,8 @@ radarchart(df_cluster_mean,
 
 ```
 
-El cluster #6 se puede ver caracterizado por un nivel de admision (ADM_RATE_ALL) muy alto(cercano al 100%) pero en otros aspectos academicos podemos ver que en cuanto al desempeño en su carrera(c150_4) es bastante bajo, ya que pocos logran cumplir con lo esperado, ademas se observa un desempeño promedio en las pruebas escolares (SAT_AVG) bastante bajo 
-En cuanto a aspectos econmicos de las universidades:
-Este grupo se caracteriza por tener costos tanto en privadas como publicas (NPT4_PUB Y NPT4_PRIV) bajos, ademas de ingresos por estudiantes (TUITFTE) de igual manera bajos
-en cuanto a las deudas promedios de los estudiante(DEBT_MDN) tambien son bajas y el numero de estudiantes que han recibido prestamos federales es medio
+El cluster 6 es bastante peculiar, ya que teniendo un nivel de admision bastante alto (cerca al 90%), en los otros aspectos academicos podemos ver un bajo rendimiento en las pruebas de admsion sat y en el desempeño en la completacion de la carrera en el tiempo en especificado
+en otros aspectos podemos ver que el coste de estudiar en una universidad publica es bastante bajo,como tambien los ingresos netos por matricula por estudiante son bastante bajos, ademas de que el valor de la media de la deuda acumulada por los estudiantes, como el numero de estudiantes que recibieron prestamos federales es bastante bajo 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
