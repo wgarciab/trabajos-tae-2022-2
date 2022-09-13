@@ -32,7 +32,7 @@ DT::datatable(head(colleges), options = list(
         scrollY = "250px"))
 ```
 
-Lo que haremos a continuación será quitar las columnas nulas, es decir, aquellas variables para las cuales no hay información. De esta forma, nuestra base de datos se redujo de 1725 a 551 columnas.
+Lo que haremos a continuación será quitar las columnas nulas, es decir, aquellas variables para las cuales no hay información. De esta forma, nuestra base de datos se reduce de 1725 a 551 columnas.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #sum(is.na(colleges$mn_earn_wne_p8))
@@ -54,7 +54,7 @@ college_subset <- colleges %>%
 Las variables seleccionados fueron las siguientes
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-dictionary %>% filter(`VARIABLE NAME` %in% names(college_subset)) %>% select(`NAME OF DATA ELEMENT`)
+dictionary %>% filter(`VARIABLE NAME` %in% names(college_subset)) %>% select('NAME OF DATA ELEMENT', 'VARIABLE NAME')
 ```
 
 Veamos cuantos nulos hay en cada columna
@@ -89,13 +89,26 @@ sapply(college_subset2, function(x) sum(is.na(x)))
 
 # PCA (Análisis de componentes principales)
 
-Con las primeras 9 variables se explica un 92.9% de la varianza total.
+Para realizar el agrupamiento, únicamente utilizaremos las últimas 11 variables, ya que las primeras 5, tales como el nombre de la institución o su código, no nos resultan útiles para el clustering.
+
+En la siguiente matrix de correlación podemos ver que no hay una correlación fuerte entre ninguna de las variables.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(corrplot)
+cor_matrix <- cor(college_subset2)
+round(cor_matrix, 2)
+corrplot(cor_matrix)
+```
+
+Con las primeras 9 variables de estas 11, se explica un 92.9% de la varianza total. 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 college_subset2_cent <- scale(college_subset2,center = TRUE,scale = TRUE)
 college_pca <- prcomp(college_subset2_cent)
 summary(college_pca)
 ```
+
+Sin embargo, las usaremos todas, porque es de nuestro interés analizarlas todas.
 
 # Clustering
 
@@ -122,11 +135,11 @@ ggplot(clusterings, aes(k, tot.withinss)) +
     geom_point(size = 0.8)
 ```
 
-De acuerdo al metodo de Elbow, el número ideal de clusters es 12.
+De acuerdo al metodo de Elbow, el número ideal de clusters es 9, ya que se puede apreciar un "codo" en la gráfica cerca a k = 9.
 
 ## Agrupamiento con K-means
 
-Para realizar el agrupamiento, utilizaremos k-means con 12 clústers. El resultado del agrupamiento de puede apreciar en la siguiente figura
+Para realizar el agrupamiento, utilizaremos k-means con 9 clústers. El resultado del agrupamiento de puede apreciar en la siguiente figura
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 set.seed(1234)
@@ -139,7 +152,7 @@ my_kmeans <- kmeans(college_subset2, 9)
 
 ## Caracterización de los clusters
 
-En el cluster ? hay muchas universidades de belleza y cosmetología
+A continuación, revisaremos cada uno de los clusters y examinaremos sus principales características. En el siguiente gráfico, llamado gráfico de radar, se presentan las medias de los 9 clusters en cada una de las variables, normalizadas entre 0 y 1. Los valores más alejados del centro representan valores más grandes.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #colleges <- colleges %>% 
@@ -239,10 +252,11 @@ cluster9 <- college_subset2 %>%
 #            PCTFLOAN, UGDS)
 
 
-summary(cluster1)
-hist(cluster1$TUITFTE)
-write.csv(cluster1,"cluster1.csv", row.names = FALSE)
+#summary(cluster1)
+#hist(cluster1$TUITFTE)
+#write.csv(cluster1,"cluster1.csv", row.names = FALSE)
 ```
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(fmsb)
 
@@ -290,23 +304,23 @@ radarchart(df_norm,
 
 legend(x=1.15, 
        y=1.35, 
-       legend = rownames(df_norm[-c(1,2),]-2),
+       legend = c(1:9),
        bty = "n", pch=20 , col = 1:12, cex = 1.05, pt.cex = 1.5)
 ```
 
-## Descripcion de los grupos
+### Descripcion de los grupos
 
 En el cluster 1, hay una masiva tasa de admisión, cercana al 90%, pero en todos los demás aspectos presenta valores muy bajos. Sus tasas de completación de estudios y número de estudiantes es muy bajo. Como punto positivo, los costos por estudiar en estas instituciones tambien son muy bajos, aunque curiosamente, es un poco más costoso estudiar en instituciones públicas que en instituciones privadas. Cerca del 50% de los estudiantes recibe préstamos del estado, pero la deuda acumulada es muy baja, lo cual es debido posiblemente a los bajos costos de estas universidades. Sus puntajes de admision tambien son muy bajos. Se podría decir que a estas instituciones se puede entrar muy fácilmente.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 3
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 1
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 1",
            pcol = 1,
            plwd = 2)
 
@@ -316,13 +330,13 @@ El cluster 2 tiene los puntajes de admision mas altos, al igual que la tasa de c
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 4
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 2
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 2",
            pcol = 1,
            plwd = 2)
 
@@ -332,13 +346,13 @@ El cluster 3 es más interesante que los anteriores. Su número de estudiantes e
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 5
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 3
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 3",
            pcol = 1,
            plwd = 2)
 
@@ -349,13 +363,13 @@ En base a la cantidad de estudiantes que logran entrar, al rendimiento académic
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 6
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 4
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 4",
            pcol = 1,
            plwd = 2)
 
@@ -365,13 +379,13 @@ El cluster 5 podemos observar un nivel de admision medianamente alto (cercano al
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 7
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 5
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 5",
            pcol = 1,
            plwd = 2)
 
@@ -382,32 +396,31 @@ en otros aspectos podemos ver que el coste de estudiar en una universidad public
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 8
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 6
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 6",
            pcol = 1,
            plwd = 2)
 
 ```
 
-El cluster #7 se caracteriza por tener un nivel de admisiones (ADM_RATE_ALL) muy alto (cercano al 100%), en cuanto a otros aspectos academicos el desempeño en su carrera(C150_4) y el desempeño en pruebas escolares es bastante bajo.
-En aspecto economicos de las universidades:
-El costo en universidades publicas (NPT4_PUB) es bajo, pero en universidades privadas (NPT4_PRIV) el costo es alto, sin embargo en este grupo el promedio de ingresos por estudiante en la universidad(TUITFTE) lo podemos considerar bajo
-Con una deuda promedio en la universidad por todos los estudiantes (DEBT_MDN) con un valor medio, la mayoria de los estudiantes han recibido ayudas federales
+El cluster 7 se puede caracterizar por tener un nivel de admision bastante alto, cercano al 100%, pero podemos observar que el rendimiento en las pruebas de admision SAT es bastante bajo, lo que impleca que el puntaje necesario para entrar en estas universidades no es muy alto, tambien podemos notar como el desempeño en la completacion de la carrera en el tiempo estimado es bastante bajo
+en otros aspectos se puede observar que el coste promedio para estudiar tanto en universidades publicas como privadas lo podemos considerar bajo, como tambien los ingresos obtenidos por estudiantes matriculados es bastante bajo 
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 9
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 7
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 7",
            pcol = 1,
            plwd = 2)
 
@@ -422,13 +435,13 @@ Teniendo en cuenta la disparidad entre estudiantes endeudados y costos de estudi
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 10
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 8
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 8",
            pcol = 1,
            plwd = 2)
 
@@ -438,20 +451,43 @@ El cluster #9 está caracterizado por un ratio de admision de estudiantes (ADM_R
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
-cluster_number = 11
-df_cluster_mean = df_norm[cluster_number,]
+cluster_number = 9
+df_cluster_mean = df_norm[cluster_number+2,]
 df_cluster_mean <- rbind(rep(max(df_norm), 9), rep(0, 9), df_cluster_mean)
 
 radarchart(df_cluster_mean, 
            seg = 9,  # Number of axis segments
-           title = "Clusters de universidades",
+           title = "Cluster 9",
            pcol = 1,
            plwd = 2)
 
 ```
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+college_subset[6:16] <- college_subset[6:16] %>%
+    mutate_each(funs(if_else(is.na(.), median(., na.rm = TRUE), .)))
+
+college_subset = data.frame(college_subset)
+college_subset <- college_subset %>% 
+    mutate(cluster = my_kmeans$cluster) 
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# generación de los archivoos csv de los clusters
+# cluster_full <- college_subset %>%
+#     filter(cluster == 9) %>%
+#     select(OPEID, INSTNM, CITY, STABBR, ZIP,
+#            CONTROL, DISTANCEONLY, TUITFTE, ADM_RATE_ALL,
+#            C150_4, DEBT_MDN, NPT4_PUB, NPT4_PRIV, SAT_AVG,
+#            PCTFLOAN, UGDS)
+# 
+# write.csv(cluster_full,"clustersdata/cluster9.csv", row.names = FALSE)
+```
+
+
 # Referencias
 
-https://rpubs.com/juliasilge/207156
-https://rpubs.com/juliasilge/216478
+Silge, J. (2016). Exploratory Data Analysis of College Scorecard Data. https://rpubs.com/juliasilge/207156  
+Silge, J. (2016). Imputing Missing Values in the College Scorecard Data Via Very Simple Methods. https://rpubs.com/juliasilge/216478
 
