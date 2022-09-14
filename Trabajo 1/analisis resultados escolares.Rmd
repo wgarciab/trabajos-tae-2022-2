@@ -54,13 +54,13 @@ college_subset <- colleges %>%
 Las variables seleccionados fueron las siguientes
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-dictionary %>% filter(`VARIABLE NAME` %in% names(college_subset)) %>% select('NAME OF DATA ELEMENT', 'VARIABLE NAME')
+kable(dictionary %>% filter(`VARIABLE NAME` %in% names(college_subset)) %>% select('NAME OF DATA ELEMENT', 'VARIABLE NAME'))
 ```
 
 Veamos cuantos nulos hay en cada columna
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-sapply(college_subset, function(x) sum(is.na(x)))
+kable(sapply(college_subset, function(x) sum(is.na(x))))
 ```
 
 Reemplazamos los valores nulos de cada columna por la mediana de los demas valores existentes en esa columna.
@@ -84,7 +84,7 @@ college_subset2 <- college_subset2 %>%
 De esta manera, el número de nulos en todas las columnas queda en cero.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-sapply(college_subset2, function(x) sum(is.na(x)))
+kable(sapply(college_subset2, function(x) sum(is.na(x))))
 ```
 
 # PCA (Análisis de componentes principales)
@@ -96,7 +96,7 @@ En la siguiente matrix de correlación podemos ver que no hay una correlación f
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(corrplot)
 cor_matrix <- cor(college_subset2)
-round(cor_matrix, 2)
+kable(round(cor_matrix, 2))
 corrplot(cor_matrix)
 ```
 
@@ -105,7 +105,7 @@ Con las primeras 9 variables de estas 11, se explica un 92.9% de la varianza tot
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 college_subset2_cent <- scale(college_subset2,center = TRUE,scale = TRUE)
 college_pca <- prcomp(college_subset2_cent)
-summary(college_pca)
+(summary(college_pca))
 ```
 
 Sin embargo, las usaremos todas, porque es de nuestro interés analizarlas todas.
