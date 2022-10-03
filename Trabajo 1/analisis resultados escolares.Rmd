@@ -11,6 +11,9 @@ output: html_document
 # Introducción
 En este informe, examinaremos una base de datos de universidades de estados unidos, proporcionada por el Departamento de Educación de los Estados Unidos. Nuestro objetivo será realizar un agrupamiento de estas universidades, para luego caracterizar cada grupo, y determinar qué hace que un grupo sea mejor que otro.
 
+# Objetivo 
+El objetivo de este trabajo es realizar una segmentacion en grupos de universidades en base a las caracteristicas de interes de nuestro analisis, nuestro interes es el analisis del desempeño academico y como esto podria estar relacionado con el coste de las matriculas, la cantidad de estudiantes que reciben apoyos financieros y las deudas de estos estudiantes, ademas de la cantidad des estudiantes que hay por universidad.
+
 # Carga y limpieza de datos
 Inicialmente, cargamos todos los datos. La base de datos contiene 7804 observaciones de 1725 variables.
 
@@ -90,6 +93,7 @@ kable(sapply(college_subset2, function(x) sum(is.na(x))))
 # PCA (Análisis de componentes principales)
 
 Para realizar el agrupamiento, únicamente utilizaremos las últimas 11 variables, ya que las primeras 5, tales como el nombre de la institución o su código, no nos resultan útiles para el clustering.
+No se trabajó con las variables originales ya que previamente se seleccionaron manualmente las variables mas relevantes para el analisis de nuestro objetivo 
 
 En la siguiente matrix de correlación podemos ver que no hay una correlación fuerte entre ninguna de las variables.
 
@@ -135,7 +139,7 @@ ggplot(clusterings, aes(k, tot.withinss)) +
     geom_point(size = 0.8)
 ```
 
-De acuerdo al metodo de Elbow, el número ideal de clusters es 9, ya que se puede apreciar un "codo" en la gráfica cerca a k = 9.
+De acuerdo al metodo de Elbow, el número ideal de clusters es 9, ya que se puede apreciar un "codo" en la gráfica cerca a k = 9, a pesar de que en k=7 hay un codo muy pronunciado, consideramos que entre k=7 y k=9 todavia hay una mejora significativa, y a partir de k=9 las mejoras dejan de ser siginificativas ya que cada vez hay una pendiente menor.
 
 ## Agrupamiento con K-means
 
