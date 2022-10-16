@@ -3,7 +3,16 @@ import numpy as np
 from server.WoE_Binning import WoE_Binning
 
 def getWoeTransform():
-    loan_data = pd.read_csv("loan_data_2007_2014.csv")
+    # LOCAL
+    # loan_data = pd.read_csv("loan_data_2007_2014.csv")
+    # loan_data.head().to_csv("head_loan_data.csv")
+    loan_data = pd.read_csv("head_loan_data.csv")
+
+    # REMOTO
+    # url='https://drive.google.com/file/d/1bmwDovXQfQUrMZVw_MBQb7KrYDVfA4ER/view?usp=sharing'
+    # path = 'https://drive.google.com/uc?export=download&id='+url.split('/')[-2]
+    # loan_data = pd.read_csv(path)
+
     loan_data.dropna(thresh = loan_data.shape[0]*0.2, axis = 1, inplace = True)
     loan_data.drop(columns = ['id', 'member_id', 'sub_grade', 'emp_title', 'url', 'desc', 'title',
                             'zip_code', 'next_pymnt_d', 'recoveries', 'collection_recovery_fee',
