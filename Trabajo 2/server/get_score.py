@@ -31,4 +31,4 @@ def get_score(dic, woe_transform):
     # matrix dot multiplication of test set with scorecard scores
     y_score = X_input_woe_transformed.dot(scorecard_scores)
     y_score.head()
-    return y_score
+    return y_score[0][0]
