@@ -40,7 +40,7 @@ out_prncp = st.number_input('Digita el out_prncp', min_value=0, max_value=50000)
 total_pymnt = st.number_input('Digita el total_pymnt', value=30000, min_value=0, max_value=100000)
 total_rec_int = st.number_input('Digita el total_rec_int', value=30000, min_value=0, max_value=50000)
 last_pymnt_amnt = st.number_input('Digita el last_pymnt_amnt', value=30000, min_value=0, max_value=50000)
-tot_cur_bal = st.number_input('Digita el last_pymnt_amnt', value=2000000, min_value=0, max_value=5000000)
+tot_cur_bal = st.number_input('Digita el tot_cur_bal', value=2000000, min_value=0, max_value=5000000)
 total_rev_hi_lim = st.number_input('Digita el total_rev_hi_lim', value=32000, min_value=0, max_value=2000000)
 mths_since_earliest_cr_line = st.number_input('Digita el mths_since_earliest_cr_line', value=79, min_value=0, max_value=1000)
 mths_since_issue_d = st.number_input('Digita el mths_since_issue_d', value=79, min_value=0, max_value=500)
@@ -180,17 +180,17 @@ if (calcular):
     st.sidebar.write('# Resultados')
     st.sidebar.write("## Tu score es ", score)
 
-    if (score > 514.799):
+    if (score > 549.36):
         score_info = '## Felicidades! Tu Score es mayor que el promedio!'
         st.balloons()
 
-    elif (score < 514.799):
+    elif (score < 549.36):
         score_info = '## Oh no! Tu Score es menor que el promedio :('
         st.snow()
 
     st.sidebar.write(score_info)
 
     st.sidebar.write("""
-    El score promedio de la población es 514.799
+    El score promedio de la población es 549.36
     El mínimo score que puedes obtener es 300, y el máximo es 850.
     """)
