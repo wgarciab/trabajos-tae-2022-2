@@ -16,10 +16,10 @@ def get_score(dic, woe_transform):
 
     # get the list of our final scorecard scores
     # LOCAL
-    df_scorecard = pd.read_csv("df_scorecard.csv")
+    # df_scorecard = pd.read_csv("df_scorecard.csv")
     
     # REMOTO
-    # df_scorecard = pd.read_csv("Trabajo_2/df_scorecard.csv")
+    df_scorecard = pd.read_csv("Trabajo_2/df_scorecard.csv")
 
     scorecard_scores = df_scorecard['Score - Final']
     # check the shapes of test set and scorecard before doing matrix dot multiplication
