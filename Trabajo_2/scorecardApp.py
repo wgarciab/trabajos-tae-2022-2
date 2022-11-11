@@ -35,24 +35,24 @@ verification_status = st.selectbox(
     '¿Tus ingresos o los de tu co-deudor han sido verificados?',
      ['Verified', 'Not Verified', 'Source Verified'])
 purpose = st.selectbox(
-    '¿Cual es el proposito del prestamo?',
+    '¿Cual es el propósito del préstamo?',
      ['car', 'credit_card', 'debt_consolidation', 'educational', 
      'home_improvement', 'house', 'major_purchase', 'medical', 
      'moving', 'other', 'renewable_energy', 'small_business', 'vacation', 'wedding'])
-dti = st.number_input('Digita el dti (relacion deuda-ingreso', min_value=0, max_value=40)
-inq_last_6mths = st.slider('Selecciona el numero de consultas en los ultimos 6 meses', min_value=0, max_value=20)
-revol_util = st.number_input('Digita la cantidad del credito utilizado respecto la credito rotatorio', min_value=0, max_value=400)
-total_acc = st.slider('Selecciona el numero de lineas actuales en el expediente crediticio', min_value=1, max_value=100)
-out_prncp = st.number_input('Digita el capital restante para el prestamo total', min_value=0, max_value=50000)
-total_pymnt = st.number_input('Digita los pagos recibidos hasta la fecha por el prestamo total', value=30000, min_value=0, max_value=100000)
-total_rec_int = st.number_input('Digita el total_rec_int', value=30000, min_value=0, max_value=50000)
-last_pymnt_amnt = st.number_input('Digita el last_pymnt_amnt', value=30000, min_value=0, max_value=50000)
-tot_cur_bal = st.number_input('Digita el tot_cur_bal', value=2000000, min_value=0, max_value=5000000)
-total_rev_hi_lim = st.number_input('Digita el total_rev_hi_lim', value=32000, min_value=0, max_value=2000000)
-mths_since_earliest_cr_line = st.number_input('Digita el mths_since_earliest_cr_line', value=79, min_value=0, max_value=1000)
-mths_since_issue_d = st.number_input('Digita el mths_since_issue_d', value=79, min_value=0, max_value=500)
-mths_since_last_pymnt_d = st.number_input('Digita el mths_since_last_pymnt_d', value=79, min_value=0, max_value=500)
-mths_since_last_credit_pull_d = st.number_input('Digita el mths_since_last_credit_pull_d', value=79, min_value=0, max_value=500)
+dti = st.number_input('Digita el dti (relación deuda-ingreso)', min_value=0, max_value=40)
+inq_last_6mths = st.slider('Selecciona el número de consultas en los últimos 6 meses', min_value=0, max_value=20)
+revol_util = st.number_input('Digita la cantidad del crédito utilizado respecto al credito rotatorio', min_value=0, max_value=400)
+total_acc = st.slider('Selecciona el numero de líneas actuales en el expediente crediticio', min_value=1, max_value=100)
+out_prncp = st.number_input('Digita el capital restante para el préstamo total', min_value=0, max_value=50000)
+total_pymnt = st.number_input('Digita los pagos realizados hasta la fecha por el préstamo total', value=30000, min_value=0, max_value=100000)
+total_rec_int = st.number_input('Digita los intereses pagados hasta la fecha', value=30000, min_value=0, max_value=50000)
+last_pymnt_amnt = st.number_input('Digita el importe del último pago total realizado', value=30000, min_value=0, max_value=50000)
+tot_cur_bal = st.number_input('Digita el saldo actual total de todas las cuentas', value=2000000, min_value=0, max_value=5000000)
+total_rev_hi_lim = st.number_input('Digita el límite de crédito/crédito superior renovable total', value=32000, min_value=0, max_value=2000000)
+mths_since_earliest_cr_line = st.number_input('Digita el número de meses desde que abriste la primera línea de crédito', value=79, min_value=0, max_value=1000)
+mths_since_issue_d = st.number_input('Digita el el número de meses desde el momento en que se financió el préstamo', value=79, min_value=0, max_value=500)
+mths_since_last_pymnt_d = st.number_input('Digita el número de meses desde que realizaste el último pago', value=79, min_value=0, max_value=500)
+mths_since_last_credit_pull_d = st.number_input('Digita el número de meses desde que la entidad prestamista sacó crédito para tu préstamo', value=79, min_value=0, max_value=500)
 
 #grade
 grade_A = 0
