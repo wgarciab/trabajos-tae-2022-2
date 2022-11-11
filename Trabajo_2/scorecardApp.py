@@ -18,7 +18,8 @@ Esta aplicación está destinada a las personas que desean calcular su score cre
 
 """)
 
-st.write("Reporte [link](https://deepnote.com/@tae-2022-2/Trabajo-2-2d8bceee-9d6f-499d-a2bd-fd29b704bf2c)")
+st.write("[Reporte](https://deepnote.com/@tae-2022-2/Trabajo-2-2d8bceee-9d6f-499d-a2bd-fd29b704bf2c)")
+st.write("[Video](https://www.youtube.com/watch?v=F9fa0imsUdk)")
 
 term = st.radio('Selecciona el término del préstamo (cuotas)', [36, 60])
 int_rate = st.number_input('Digita la tasa de interés del préstamo (%)', min_value=0, max_value=30)
@@ -34,16 +35,16 @@ verification_status = st.selectbox(
     '¿Tus ingresos o los de tu co-deudor han sido verificados?',
      ['Verified', 'Not Verified', 'Source Verified'])
 purpose = st.selectbox(
-    '¿Cual es tu purpose?',
+    '¿Cual es el proposito del prestamo?',
      ['car', 'credit_card', 'debt_consolidation', 'educational', 
      'home_improvement', 'house', 'major_purchase', 'medical', 
      'moving', 'other', 'renewable_energy', 'small_business', 'vacation', 'wedding'])
-dti = st.number_input('Digita el dti', min_value=0, max_value=40)
-inq_last_6mths = st.slider('Selecciona el inq_last_6mths', min_value=0, max_value=20)
-revol_util = st.number_input('Digita el revol_util', min_value=0, max_value=400)
-total_acc = st.slider('Selecciona el total_acc', min_value=1, max_value=100)
-out_prncp = st.number_input('Digita el out_prncp', min_value=0, max_value=50000)
-total_pymnt = st.number_input('Digita el total_pymnt', value=30000, min_value=0, max_value=100000)
+dti = st.number_input('Digita el dti (relacion deuda-ingreso', min_value=0, max_value=40)
+inq_last_6mths = st.slider('Selecciona el numero de consultas en los ultimos 6 meses', min_value=0, max_value=20)
+revol_util = st.number_input('Digita la cantidad del credito utilizado respecto la credito rotatorio', min_value=0, max_value=400)
+total_acc = st.slider('Selecciona el numero de lineas actuales en el expediente crediticio', min_value=1, max_value=100)
+out_prncp = st.number_input('Digita el capital restante para el prestamo total', min_value=0, max_value=50000)
+total_pymnt = st.number_input('Digita los pagos recibidos hasta la fecha por el prestamo total', value=30000, min_value=0, max_value=100000)
 total_rec_int = st.number_input('Digita el total_rec_int', value=30000, min_value=0, max_value=50000)
 last_pymnt_amnt = st.number_input('Digita el last_pymnt_amnt', value=30000, min_value=0, max_value=50000)
 tot_cur_bal = st.number_input('Digita el tot_cur_bal', value=2000000, min_value=0, max_value=5000000)
