@@ -1,6 +1,7 @@
 import streamlit as st
 from server.pre_process import getWoeTransform
 from server.get_score import get_score
+from link_button import link_button
 
 @st.cache
 def load_data():
@@ -29,8 +30,8 @@ st.markdown(f'''
 ''',
 unsafe_allow_html=True)
 
-url_video= '[Video](https://www.youtube.com/watch?v=F9fa0imsUdk)'
-st.markdown(url_video, unsafe_allow_html=True)
+
+link_button('Video promocional', 'https://www.youtube.com/watch?v=F9fa0imsUdk')
 
 term = st.radio('Selecciona el término del préstamo (cuotas)', [36, 60])
 int_rate = st.number_input('Digita la tasa de interés del préstamo (%)', min_value=0, max_value=30)
