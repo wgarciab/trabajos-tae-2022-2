@@ -22,17 +22,15 @@ Esta aplicación está destinada a las personas que desean calcular su score cre
 # st.write("[Video](https://www.youtube.com/watch?v=F9fa0imsUdk)")
 
 url_reporte = 'https://deepnote.com/@tae-2022-2/Trabajo-2-2d8bceee-9d6f-499d-a2bd-fd29b704bf2c'
-url_video = 'https://www.youtube.com/watch?v=F9fa0imsUdk'
+
 
 st.markdown(f'''
 <a href={url_reporte}><button style="background-color:GreenYellow;">Reporte técnico</button></a>
 ''',
 unsafe_allow_html=True)
 
-st.markdown(f'''
-<a href={url_video}><button style="background-color:GreenYellow;">Video promocional</button></a>
-''',
-unsafe_allow_html=True)
+url_video= '[Video](https://www.youtube.com/watch?v=F9fa0imsUdk)'
+st.markdown(link, unsafe_allow_html=True)
 
 term = st.radio('Selecciona el término del préstamo (cuotas)', [36, 60])
 int_rate = st.number_input('Digita la tasa de interés del préstamo (%)', min_value=0, max_value=30)
