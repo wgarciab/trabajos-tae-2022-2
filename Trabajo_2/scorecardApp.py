@@ -30,12 +30,6 @@ st.markdown(f'''
 ''',
 unsafe_allow_html=True)
 
-st.write(' ')
-
-st.markdown(f'''
-<a href={url_video}><button style="background-color:GreenYellow;">Video promocional</button></a>
-''',
-unsafe_allow_html=True)
 
 
 term = st.radio('Selecciona el término del préstamo (cuotas)', [36, 60])
@@ -70,6 +64,11 @@ mths_since_earliest_cr_line = st.number_input('Digita el número de meses desde 
 mths_since_issue_d = st.number_input('Digita el el número de meses desde el momento en que se financió el préstamo', value=79, min_value=0, max_value=500)
 mths_since_last_pymnt_d = st.number_input('Digita el número de meses desde que realizaste el último pago', value=79, min_value=0, max_value=500)
 mths_since_last_credit_pull_d = st.number_input('Digita el número de meses desde que la entidad prestamista sacó crédito para tu préstamo', value=79, min_value=0, max_value=500)
+
+st.markdown(f'''
+<a href={url_video}><button style="background-color:GreenYellow;">Video promocional</button></a>
+''',
+unsafe_allow_html=True)
 
 #grade
 grade_A = 0
