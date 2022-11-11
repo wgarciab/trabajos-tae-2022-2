@@ -1,7 +1,7 @@
 import streamlit as st
 from server.pre_process import getWoeTransform
 from server.get_score import get_score
-from link_button import link_button
+
 
 @st.cache
 def load_data():
