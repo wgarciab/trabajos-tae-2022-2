@@ -31,7 +31,7 @@ st.markdown(f'''
 unsafe_allow_html=True)
 
 st.markdown(f'''
-<a href={url_video}><button style="background-color:GreenYellow;">Video/button></a>
+<a href={url_video}><button style="background-color:GreenYellow;">Video</button></a>
 ''',
 unsafe_allow_html=True)
 
