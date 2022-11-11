@@ -23,7 +23,6 @@ Esta aplicación está destinada a las personas que desean calcular su score cre
 # st.write("[Video](https://www.youtube.com/watch?v=F9fa0imsUdk)")
 
 url_reporte = 'https://deepnote.com/@tae-2022-2/Trabajo-2-2d8bceee-9d6f-499d-a2bd-fd29b704bf2c'
-#url_video = 'https://www.youtube.com/watch?v=F9fa0imsUdk'
 url_video = 'https://youtu.be/F9fa0imsUdk'
 
 st.markdown(f'''
@@ -31,7 +30,10 @@ st.markdown(f'''
 ''',
 unsafe_allow_html=True)
 
-
+st.markdown(f'''
+<a href={url_video}><button style="background-color:GreenYellow;">Video promocional</button></a>
+''',
+unsafe_allow_html=True)
 
 term = st.radio('Selecciona el término del préstamo (cuotas)', [36, 60])
 int_rate = st.number_input('Digita la tasa de interés del préstamo (%)', min_value=0, max_value=30)
@@ -65,11 +67,6 @@ mths_since_earliest_cr_line = st.number_input('Digita el número de meses desde 
 mths_since_issue_d = st.number_input('Digita el el número de meses desde el momento en que se financió el préstamo', value=79, min_value=0, max_value=500)
 mths_since_last_pymnt_d = st.number_input('Digita el número de meses desde que realizaste el último pago', value=79, min_value=0, max_value=500)
 mths_since_last_credit_pull_d = st.number_input('Digita el número de meses desde que la entidad prestamista sacó crédito para tu préstamo', value=79, min_value=0, max_value=500)
-
-st.markdown(f'''
-<a href={url_video}><button style="background-color:GreenYellow;">Video promocional</button></a>
-''',
-unsafe_allow_html=True)
 
 #grade
 grade_A = 0
