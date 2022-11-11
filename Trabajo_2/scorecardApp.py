@@ -12,20 +12,26 @@ woe_transform = load_data()
 st.write("""
 # Credit Scorecard
 Conoce tu score crediticio!
+
+
+Esta aplicación está destinada a las personas que desean calcular su score crediticio y evaluar su pocisión frente a las entidades bancarias antes de realizar un préstamo.
+
 """)
 
-term = st.radio('Selecciona el term', [36, 60])
-int_rate = st.number_input('Digita el int_rate', min_value=0, max_value=30)
+st.write("Reporte [link](https://deepnote.com/@tae-2022-2/Trabajo-2-2d8bceee-9d6f-499d-a2bd-fd29b704bf2c)")
+
+term = st.radio('Selecciona el término del préstamo (cuotas)', [36, 60])
+int_rate = st.number_input('Digita la tasa de interés del préstamo (%)', min_value=0, max_value=30)
 grade = st.selectbox(
-    '¿Cual es tu grade?',
+    '¿Cual es la clasificación del crédito?',
      ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
-emp_length = st.slider('Selecciona el emp_lenght', min_value=0, max_value=10)
+emp_length = st.slider('¿Cuantos años has trabajado?', min_value=0, max_value=10)
 home_ownership = st.selectbox(
-    '¿Cual es tu home_ownership?',
+    '¿Cual es tu estado de propiedad de vivienda?',
      ['MORTGAGE', 'OWN', 'RENT', 'NONE', 'OTHER'])
-annual_inc = st.number_input('Digita el annual_inc', min_value=0, max_value=5000000)
+annual_inc = st.number_input('¿Cuáles son tus ingresos anuales?', min_value=0, max_value=5000000)
 verification_status = st.selectbox(
-    '¿Cual es tu verification_status?',
+    '¿Tus ingresos o los de tu co-deudor han sido verificados?',
      ['Verified', 'Not Verified', 'Source Verified'])
 purpose = st.selectbox(
     '¿Cual es tu purpose?',
