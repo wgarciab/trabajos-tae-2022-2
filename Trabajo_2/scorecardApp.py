@@ -30,7 +30,7 @@ st.markdown(f'''
 unsafe_allow_html=True)
 
 url_video= '[Video](https://www.youtube.com/watch?v=F9fa0imsUdk)'
-st.markdown(link, unsafe_allow_html=True)
+st.markdown(url_video, unsafe_allow_html=True)
 
 term = st.radio('Selecciona el término del préstamo (cuotas)', [36, 60])
 int_rate = st.number_input('Digita la tasa de interés del préstamo (%)', min_value=0, max_value=30)
