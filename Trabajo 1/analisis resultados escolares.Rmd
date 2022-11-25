@@ -25,7 +25,10 @@ dim(colleges)
 #str(colleges)
 #summary(colleges)
 ```
-Podemos examinar las primeras 6 observaciones para hacernos una idea de la estructura de la base de datos
+Podemos examinar las primeras 6 observaciones para hacernos una idea de la estructura de la base de datos, tal como se ve en la tabla 1.
+
+**Tabla 1**  
+*Primeras 6 observaciones de la base de datos*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
@@ -54,13 +57,19 @@ college_subset <- colleges %>%
            C150_4, DEBT_MDN,SAT_AVG, PCTFLOAN, UGDS, NPT4_PUB, NPT4_PRIV)
 ```
 
-Las variables seleccionados fueron las siguientes
+Las variables seleccionados fueron las siguientes (ver tabla 2)
+
+**Tabla 2**  
+*Variables seleccionadas*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(dictionary %>% filter(`VARIABLE NAME` %in% names(college_subset)) %>% select('NAME OF DATA ELEMENT', 'VARIABLE NAME'))
 ```
 
-Veamos cuantos nulos hay en cada columna
+Veamos cuantos nulos hay en cada columna (ver tabla 3)
+
+**Tabla 3**  
+*Número de nulos en cada columna*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(sapply(college_subset, function(x) sum(is.na(x))))
@@ -84,7 +93,10 @@ college_subset2 <- college_subset2 %>%
 
 ```
 
-De esta manera, el número de nulos en todas las columnas queda en cero.
+De esta manera, el número de nulos en todas las columnas queda en cero, tal como se ve en la tabla 4.
+
+**Tabla 4**  
+*Número de nulos en cada columna luego de la limpieza de datos*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(sapply(college_subset2, function(x) sum(is.na(x))))
@@ -96,12 +108,21 @@ Para realizar el agrupamiento, únicamente utilizaremos las últimas 11 variable
 
 No se trabajó con las variables originales ya que previamente se seleccionaron manualmente las variables mas relevantes para el analisis de nuestro objetivo.
 
-En la siguiente matrix de correlación podemos ver que no hay una correlación fuerte entre ninguna de las variables.
+En la siguiente matriz de correlación podemos ver que no hay una correlación fuerte entre ninguna de las variables (ver tabla 5 y figura 1).
+
+**Tabla 5**  
+*Matriz de correlación*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(corrplot)
 cor_matrix <- cor(college_subset2)
 kable(round(cor_matrix, 2))
+```
+
+**Figura 1**  
+*Matriz de correlación*
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 corrplot(cor_matrix)
 ```
 
@@ -119,7 +140,10 @@ Sin embargo, las usaremos todas, porque es de nuestro interés analizarlas todas
 
 ## Seleccion del numero de clusters
 
-Para seleccionar el número adecuado de clusters, usaremos el método de Elbow. Veamos la curva generada:
+Para seleccionar el número adecuado de clusters, usaremos el método de Elbow. Veamos la curva generada (figura 2):
+
+**Figura 2**  
+*Curva de Elbow*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(broom)
@@ -144,7 +168,10 @@ De acuerdo al metodo de Elbow, el número ideal de clusters es 9, ya que se pued
 
 ## Agrupamiento con K-means
 
-Para realizar el agrupamiento, utilizaremos k-means con 9 clústers. El resultado del agrupamiento de puede apreciar en la siguiente figura
+Para realizar el agrupamiento, utilizaremos k-means con 9 clústers. El resultado del agrupamiento de puede apreciar en la siguiente figura (figura 3)
+
+**Figura 3**  
+*Agrupamiento con k-means*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 set.seed(1234)
@@ -157,7 +184,10 @@ my_kmeans <- kmeans(college_subset2, 9)
 
 ## Caracterización de los clusters
 
-A continuación, revisaremos cada uno de los clusters y examinaremos sus principales características. En el siguiente gráfico, llamado gráfico de radar, se presentan las medias de los 9 clusters en cada una de las variables, normalizadas entre 0 y 1. Los valores más alejados del centro representan valores más grandes.
+A continuación, revisaremos cada uno de los clusters y examinaremos sus principales características. En el siguiente gráfico (ver figura 4), llamado gráfico de radar, se presentan las medias de los 9 clusters en cada una de las variables, normalizadas entre 0 y 1. Los valores más alejados del centro representan valores más grandes.
+
+**Figura 4**  
+*Gráfico de radar de todos los clusters*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #colleges <- colleges %>% 
@@ -315,7 +345,10 @@ legend(x=1.15,
 
 ### Descripcion de los grupos
 
-En el cluster 1, hay una masiva tasa de admisión, cercana al 90%, pero en todos los demás aspectos presenta valores muy bajos. Sus tasas de completación de estudios y número de estudiantes es muy bajo. Como punto positivo, los costos por estudiar en estas instituciones tambien son muy bajos, aunque curiosamente, es un poco más costoso estudiar en instituciones públicas que en instituciones privadas. Cerca del 50% de los estudiantes recibe préstamos del estado, pero la deuda acumulada es muy baja, lo cual es debido posiblemente a los bajos costos de estas universidades. Sus puntajes de admision tambien son muy bajos. Se podría decir que a estas instituciones se puede entrar muy fácilmente.
+En el cluster 1 (ver figura 5), hay una masiva tasa de admisión, cercana al 90%, pero en todos los demás aspectos presenta valores muy bajos. Sus tasas de completación de estudios y número de estudiantes es muy bajo. Como punto positivo, los costos por estudiar en estas instituciones tambien son muy bajos, aunque curiosamente, es un poco más costoso estudiar en instituciones públicas que en instituciones privadas. Cerca del 50% de los estudiantes recibe préstamos del estado, pero la deuda acumulada es muy baja, lo cual es debido posiblemente a los bajos costos de estas universidades. Sus puntajes de admision tambien son muy bajos. Se podría decir que a estas instituciones se puede entrar muy fácilmente.
+
+**Figura 5**  
+*Gráfico de radar del cluster 1*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -331,13 +364,19 @@ radarchart(df_cluster_mean,
 
 ```
 
-En la siguiente tabla se presentan los estadísticos principales de este cluster
+En la siguiente tabla (tabla 6) se presentan los estadísticos principales de este cluster
+
+**Tabla 6**  
+*Estadísticos del cluster 1*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(summary(cluster1), caption = "Estadisticos del cluster 1")
 ```
 
-El cluster 2 tiene los puntajes de admision mas altos, al igual que la tasa de completación de estudios mas alta, pero su tasa de admisión es la mas baja, y cuenta con pocos estudiantes. Cerca del 80% de los estudiantes recibe préstamos del estado, y además, el costo de estudiar en universidades privadas de este grupo es excesivamente alto, razón por la cual se puede explicar que la deuda acumulada sea bastante alta también. Se podría decir que es un grupo de universidades exclusivo.
+El cluster 2 (ver figura 6) tiene los puntajes de admision mas altos, al igual que la tasa de completación de estudios mas alta, pero su tasa de admisión es la mas baja, y cuenta con pocos estudiantes. Cerca del 80% de los estudiantes recibe préstamos del estado, y además, el costo de estudiar en universidades privadas de este grupo es excesivamente alto, razón por la cual se puede explicar que la deuda acumulada sea bastante alta también. Se podría decir que es un grupo de universidades exclusivo.
+
+**Figura 6**  
+*Gráfico de radar del cluster 2*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -353,13 +392,19 @@ radarchart(df_cluster_mean,
 
 ```
 
-En la siguiente tabla se presentan los estadísticos principales de este cluster
+En la siguiente tabla (tabla 7) se presentan los estadísticos principales de este cluster
+
+**Tabla 7**  
+*Estadísticos del cluster 2*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(summary(cluster2), caption = "Estadisticos del cluster 2")
 ```
 
-El cluster 3 es más interesante que los anteriores. Su número de estudiantes es muy bajo, pero en todos los demás aspectos es bastante equilibrado. El costo de estudiar en instituciones privadas de este grupo es intermedio, y en instituciones públicas es un poco inferior. Cerca del 50% de los estudiantes de este grupo tienen préstamos, pero aun así, la deuda acumulada no es muy grande. Los puntajes de admisión son relativamente altos, y la tasa de admisión está derca del 20%. La tasa de completación está cerca del 40%
+El cluster 3 (ver figura 7) es más interesante que los anteriores. Su número de estudiantes es muy bajo, pero en todos los demás aspectos es bastante equilibrado. El costo de estudiar en instituciones privadas de este grupo es intermedio, y en instituciones públicas es un poco inferior. Cerca del 50% de los estudiantes de este grupo tienen préstamos, pero aun así, la deuda acumulada no es muy grande. Los puntajes de admisión son relativamente altos, y la tasa de admisión está derca del 20%. La tasa de completación está cerca del 40%
+
+**Figura 7**  
+*Gráfico de radar del cluster 3*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -375,14 +420,20 @@ radarchart(df_cluster_mean,
 
 ```
 
-En la siguiente tabla se presentan los estadísticos principales de este cluster
+En la siguiente tabla (tabla 8) se presentan los estadísticos principales de este cluster
+
+**Tabla 8**  
+*Estadísticos del cluster 3*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(summary(cluster3), caption = "Estadisticos del cluster 3")
 ```
 
-El cluster #4 está caracterizado por unos niveles de admisión (ADM_RATE_ALL) reducidos (40% aprox.) y una cantidad de estudiantes matriculados (UGDS) muy altas a comparación del resto de clusters. Los estudiantes en estas universidades parecen estar caracterizados por un nivel académico bueno en pruebas SAT (SAT_AVG) y niveles aceptables (45%) en cuanto al avance de sus carreras en el plazo estipulado se refiere (C150_4). Podemos notar tambén que a un nivel de préstamos, que la mayoría  de estudiantes no ha recibido subsidios o prestamos gubernametales (PCTFLOAN) y esto parece estar reflejado en el monto de deuda gubernamental acumulada (DEBT_MDN) registrada en dicha universidad que es bajo. Estas universidades en sí no parecen ser muy caras como se puede ver en la variable TUITFTE, pero sí parecen ser bastante costoso estudiar en ellas, aspecto evidenciado en los costos promedios totales en universidades públicas (NPT4_PUB)(con un 100% aprox.). En universidades privadas (NPT4_PRIV) no parece ser tan alto. 
+El cluster #4 (ver figura 8) está caracterizado por unos niveles de admisión (ADM_RATE_ALL) reducidos (40% aprox.) y una cantidad de estudiantes matriculados (UGDS) muy altas a comparación del resto de clusters. Los estudiantes en estas universidades parecen estar caracterizados por un nivel académico bueno en pruebas SAT (SAT_AVG) y niveles aceptables (45%) en cuanto al avance de sus carreras en el plazo estipulado se refiere (C150_4). Podemos notar tambén que a un nivel de préstamos, que la mayoría  de estudiantes no ha recibido subsidios o prestamos gubernametales (PCTFLOAN) y esto parece estar reflejado en el monto de deuda gubernamental acumulada (DEBT_MDN) registrada en dicha universidad que es bajo. Estas universidades en sí no parecen ser muy caras como se puede ver en la variable TUITFTE, pero sí parecen ser bastante costoso estudiar en ellas, aspecto evidenciado en los costos promedios totales en universidades públicas (NPT4_PUB)(con un 100% aprox.). En universidades privadas (NPT4_PRIV) no parece ser tan alto. 
 En base a la cantidad de estudiantes que logran entrar, al rendimiento académico de éstos y el coste promedio de estudiar en ellas, las instituciones formadas por éste cluster parecen ser universidades de media/alta calidad y para estudiantes con un estatus social medio/alto.
+
+**Figura 8**  
+*Gráfico de radar del cluster 4*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -398,13 +449,19 @@ radarchart(df_cluster_mean,
 
 ```
 
-En la siguiente tabla se presentan los estadísticos principales de este cluster
+En la siguiente tabla (tabla 9) se presentan los estadísticos principales de este cluster
+
+**Tabla 9**  
+*Estadísticos del cluster 4*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(summary(cluster4), caption = "Estadisticos del cluster 4")
 ```
 
-El cluster 5 podemos observar un nivel de admision medianamente alto (cercano al 70%), mientras que en el promedio de las pruebas de admision sat observamos un valor muy bajo, como tambien un desempeño en la completacion de la carrera en un tiempo especifico igualmente bajo, ahora viendo los aspectos economicos de las universidades, el coste de estudiar en una universidad privado como en una universidad publica es bastante parecido (rondando entre el 60% y el 50%), sin embargo los ingresos netos de matricula por los estudiantes es bastante bajo, ademas se tienen valores bastante altos tanto en la media de la deuda acumuladad por los estudiantes como en la cantidad de estudiantes que recibieron prestamos federales
+El cluster 5 (ver figura 9) podemos observar un nivel de admision medianamente alto (cercano al 70%), mientras que en el promedio de las pruebas de admision sat observamos un valor muy bajo, como tambien un desempeño en la completacion de la carrera en un tiempo especifico igualmente bajo, ahora viendo los aspectos economicos de las universidades, el coste de estudiar en una universidad privado como en una universidad publica es bastante parecido (rondando entre el 60% y el 50%), sin embargo los ingresos netos de matricula por los estudiantes es bastante bajo, ademas se tienen valores bastante altos tanto en la media de la deuda acumuladad por los estudiantes como en la cantidad de estudiantes que recibieron prestamos federales
+
+**Figura 9**  
+*Gráfico de radar del cluster 5*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -420,14 +477,20 @@ radarchart(df_cluster_mean,
 
 ```
 
-En la siguiente tabla se presentan los estadísticos principales de este cluster
+En la siguiente tabla (tabla 10) se presentan los estadísticos principales de este cluster
+
+**Tabla 10**  
+*Estadísticos del cluster 5*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(summary(cluster5), caption = "Estadisticos del cluster 5")
 ```
 
-El cluster 6 es bastante peculiar, ya que teniendo un nivel de admision bastante alto (cerca al 90%), en los otros aspectos academicos podemos ver un bajo rendimiento en las pruebas de admsion sat y en el desempeño en la completacion de la carrera en el tiempo en especificado
+El cluster 6 (ver figura 10) es bastante peculiar, ya que teniendo un nivel de admision bastante alto (cerca al 90%), en los otros aspectos academicos podemos ver un bajo rendimiento en las pruebas de admsion sat y en el desempeño en la completacion de la carrera en el tiempo en especificado
 en otros aspectos podemos ver que el coste de estudiar en una universidad publica es bastante bajo,como tambien los ingresos netos por matricula por estudiante son bastante bajos, ademas de que el valor de la media de la deuda acumulada por los estudiantes, como el numero de estudiantes que recibieron prestamos federales es bastante bajo 
+
+**Figura 10**  
+*Gráfico de radar del cluster 6*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -443,15 +506,20 @@ radarchart(df_cluster_mean,
 
 ```
 
-En la siguiente tabla se presentan los estadísticos principales de este cluster
+En la siguiente tabla (tabla 11) se presentan los estadísticos principales de este cluster
+
+**Tabla 11**  
+*Estadísticos del cluster 6*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(summary(cluster6), caption = "Estadisticos del cluster 6")
 ```
 
-El cluster 7 se puede caracterizar por tener un nivel de admision bastante alto, cercano al 100%, pero podemos observar que el rendimiento en las pruebas de admision SAT es bastante bajo, lo que impleca que el puntaje necesario para entrar en estas universidades no es muy alto, tambien podemos notar como el desempeño en la completacion de la carrera en el tiempo estimado es bastante bajo
+El cluster 7 (ver figura 11) se puede caracterizar por tener un nivel de admision bastante alto, cercano al 100%, pero podemos observar que el rendimiento en las pruebas de admision SAT es bastante bajo, lo que impleca que el puntaje necesario para entrar en estas universidades no es muy alto, tambien podemos notar como el desempeño en la completacion de la carrera en el tiempo estimado es bastante bajo
 en otros aspectos se puede observar que el coste promedio para estudiar tanto en universidades publicas como privadas lo podemos considerar bajo, como tambien los ingresos obtenidos por estudiantes matriculados es bastante bajo 
 
+**Figura 11**  
+*Gráfico de radar del cluster 7*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -467,14 +535,20 @@ radarchart(df_cluster_mean,
 
 ```
 
-En la siguiente tabla se presentan los estadísticos principales de este cluster
+En la siguiente tabla (tabla 12) se presentan los estadísticos principales de este cluster
+
+**Tabla 12**  
+*Estadísticos del cluster 7*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(summary(cluster7), caption = "Estadisticos del cluster 7")
 ```
 
-El cluster #8 está caracterizado por una proporción considerable (85% aprox) de estudiantes admitidos (ADM_RATE_ALL) y una muy baja cantidad de estudiantes matriculados en universidades (UGDS) a comparación de otros clusters. En un ámbito académico el cluster no es de destacar, tiene un rendimiento académico (SAT_AVG) muy bajo y el avance esperado de sus estudiantes (C150_4) tampoco es bueno. Interesantemente, notamos que a pesar de que la deuda acumulada de la universidad (DEBT_MDN) y la proporción de estudiantes que han recibido préstamos (PCTFLOAN) es bajo, tanto el coste de matricula (TUITFTE) como el coste de estudiar en las instituciones (NPT4_PUB, NPT4_PRIV) son especialmente altos. 
+El cluster #8 (ver figura 12) está caracterizado por una proporción considerable (85% aprox) de estudiantes admitidos (ADM_RATE_ALL) y una muy baja cantidad de estudiantes matriculados en universidades (UGDS) a comparación de otros clusters. En un ámbito académico el cluster no es de destacar, tiene un rendimiento académico (SAT_AVG) muy bajo y el avance esperado de sus estudiantes (C150_4) tampoco es bueno. Interesantemente, notamos que a pesar de que la deuda acumulada de la universidad (DEBT_MDN) y la proporción de estudiantes que han recibido préstamos (PCTFLOAN) es bajo, tanto el coste de matricula (TUITFTE) como el coste de estudiar en las instituciones (NPT4_PUB, NPT4_PRIV) son especialmente altos. 
 Teniendo en cuenta la disparidad entre estudiantes endeudados y costos de estudio en las universidades de este cluster, podríamos llegar a inferir que en estas universidades estudian personas con una capacidad adquisitiva suficiente para no tener que costear a crédito sus estudios. 
+
+**Figura 12**  
+*Gráfico de radar del cluster 8*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -490,13 +564,19 @@ radarchart(df_cluster_mean,
 
 ```
 
-En la siguiente tabla se presentan los estadísticos principales de este cluster
+En la siguiente tabla (tabla 13) se presentan los estadísticos principales de este cluster
+
+**Tabla 13**  
+*Estadísticos del cluster 8*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(summary(cluster8), caption = "Estadisticos del cluster 8")
 ```
 
-El cluster #9 está caracterizado por un ratio de admision de estudiantes (ADM_RATE_ALL) muy alto (casi el 100%) y un . El nivel de los estudiantes en las pruebas SAT es bastante bajo en estas universidades, y su avance esperado en sus carreras (C150_4) también lo es. En su gran mayoría, los alumnos de estas instituciones han recibido prestmamos (PCTFLOAN) federales (casi el 100%), a pesar del bajo coste aparente de matricular en estas (TUITFTE). Aun así podemos observar que el coste total de estudiar en estas universidades es medio para universidades privadas (NPT4_PRIV) y relativamente bajo para las públicas (NPT4_PUB). Finalmente hay que destacar que no hay una cantidad relativamente alta de estudiantes matriculados (UGDS) en este cluster a comparación de otros. Se podría decir, en base al historial crediticio, ratio de admisión, cantidad de estudiantes y desempeño académico, que en este cluster consta de pequeñas universidades publicas y privadas con estudiantes de medios/bajos recursos económicos. 
+El cluster #9 (ver figura 13) está caracterizado por un ratio de admision de estudiantes (ADM_RATE_ALL) muy alto (casi el 100%) y un . El nivel de los estudiantes en las pruebas SAT es bastante bajo en estas universidades, y su avance esperado en sus carreras (C150_4) también lo es. En su gran mayoría, los alumnos de estas instituciones han recibido prestmamos (PCTFLOAN) federales (casi el 100%), a pesar del bajo coste aparente de matricular en estas (TUITFTE). Aun así podemos observar que el coste total de estudiar en estas universidades es medio para universidades privadas (NPT4_PRIV) y relativamente bajo para las públicas (NPT4_PUB). Finalmente hay que destacar que no hay una cantidad relativamente alta de estudiantes matriculados (UGDS) en este cluster a comparación de otros. Se podría decir, en base al historial crediticio, ratio de admisión, cantidad de estudiantes y desempeño académico, que en este cluster consta de pequeñas universidades publicas y privadas con estudiantes de medios/bajos recursos económicos. 
+
+**Figura 13**  
+*Gráfico de radar del cluster 9*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #para visualizar cada cluster por separado, cambiar el siguiente numero:
@@ -512,7 +592,10 @@ radarchart(df_cluster_mean,
 
 ```
 
-En la siguiente tabla se presentan los estadísticos principales de este cluster
+En la siguiente tabla (tabla 14) se presentan los estadísticos principales de este cluster
+
+**Tabla 14**  
+*Estadísticos del cluster 9*
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 kable(summary(cluster9), caption = "Estadisticos del cluster 9")
